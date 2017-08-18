@@ -19,6 +19,10 @@ I'm not good at this stuff, I've probably made milions of mistakes and anyone wi
 
 Somewhere there is "pgl example.zip" which contains server.js configured to look kinda-like PGL's HUD and files needed. Sorry there is such a mess :c
 
+
+## PGL's example
+I hope neither Valve or PGL will be upset about making [this example](https://mega.nz/#!HpQUFB7Q!MT1TecAVYj8xfdXt4zwyrNa2kSwxFVUdRWkrPIBbBDs), none of the images or graphics are mine btw.
+
 ## Main methods
 It's worth noting all methods return JSONs or `false` boolean, so be prepared for that.
 
