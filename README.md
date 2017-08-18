@@ -97,6 +97,9 @@ Methods
 |`getStats()`|Player's current statistics (list below)|```var stats = player.getStats();```|(Array)|
 
 Statistics:
+
+
+
 |Stat's name|Description|Example|Values|
 |---|---|---|---|
 |health|Player's health|```var health = player.getStats().health;```|(int) 0-100|
