@@ -22,6 +22,9 @@ variable is being passed to it, and from that we can take actions, such as getti
 ### `data`
 
 Methods to obtain different objects:
+
+
+
 |Method|Description|Example|Returned objects|
 |---|---|---|---|
 |`getPlayers()`|List of players|`var players = data.getPlayers();`|(Array of Players)|
@@ -33,6 +36,8 @@ Methods to obtain different objects:
 |`round()`|Round's information|```var round = data.round();```|(Round)|
 |`map()`|Map's information|```var map = data.map();```|(Map)|
 |`previously()`|If anything changed since last update, it will contain the previous value|```var previously = data.previously();```|(Array) More information about `previously()` you will find on the bottom|
+
+
 Example:
 ```javascript
 function updatePage(data) {
