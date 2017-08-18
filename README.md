@@ -14,7 +14,10 @@ Shout-out to [RedSparr0w](https://github.com/RedSparr0w) for base code and idea!
  - I installed NW.js (nwjs.io) to C:\nw
  - I unpacked this whole script to C:\server
  - I run command in cmd "C:\nw\nw.exe C:\server"
-I'm not good at this stuff, I've probably made milions of mistakes and anyone with experience could have done it better. But I was the first :)
+ 
+I'm not good at this stuff, I've probably made milions of mistakes and anyone with experience could have done it better. But I was the first :) Also if I can, I will help with problems.
+
+Somewhere there is "pgl example.zip" which contains server.js configured to look kinda-like PGL's HUD and files needed. Sorry there is such a mess :c
 
 ## Main methods
 It's worth noting all methods return JSONs or `false` boolean, so be prepared for that.
