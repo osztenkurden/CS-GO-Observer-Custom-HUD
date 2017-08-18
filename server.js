@@ -45,7 +45,19 @@ var icons = {
     ssg08: "http://vignette4.wikia.nocookie.net/cswikia/images/3/3c/Ssg08_hud_csgo.png/revision/latest/scale-to-width-down/400",
     scar20: "http://vignette4.wikia.nocookie.net/cswikia/images/c/c9/Scar20_hud_csgo.png/revision/latest/scale-to-width-down/400",
     m249: "http://vignette2.wikia.nocookie.net/cswikia/images/e/ea/M249_hud_csgo.png/revision/latest/scale-to-width-down/400",
-    negev: "http://vignette2.wikia.nocookie.net/cswikia/images/b/be/Negev_hud.png/revision/latest/scale-to-width-down/400"
+    negev: "http://vignette2.wikia.nocookie.net/cswikia/images/b/be/Negev_hud.png/revision/latest/scale-to-width-down/400",
+knife: "http://vignette2.wikia.nocookie.net/cswikia/images/4/4b/Knife_ct_hud_outline_csgo.png/revision/latest/scale-to-width-down/400",
+   knife_t: "http://vignette3.wikia.nocookie.net/cswikia/images/2/28/Knife_t_hud_outline_csgo.png/revision/latest/scale-to-width-down/400",
+   knife_bayonet: "http://vignette2.wikia.nocookie.net/cswikia/images/2/28/Csgo_knife_Bayonet.png/revision/latest/scale-to-width-down/400",
+    knife_butterfly: "http://vignette2.wikia.nocookie.net/cswikia/images/d/df/Knife_butterfly_hud_outline_csgo.png/revision/latest/scale-to-width-down/400",
+    knife_falchion: "http://vignette4.wikia.nocookie.net/cswikia/images/7/7e/Falchion_Knife_hud_outline_csgo.png/revision/latest/scale-to-width-down/400",
+    knife_flip: "http://vignette3.wikia.nocookie.net/cswikia/images/a/a4/Knife_flip_hud_outline_csgo.png/revision/latest/scale-to-width-down/400",
+    knife_gut: "http://vignette2.wikia.nocookie.net/cswikia/images/f/ff/Knife_gut_hud_outline_csgo.png/revision/latest/scale-to-width-down/400",
+    knife_tactical: "http://vignette2.wikia.nocookie.net/cswikia/images/5/53/Knife_hustman_hud_outline_csgo.png/revision/latest/scale-to-width-down/400",
+    knife_karambit: "http://vignette4.wikia.nocookie.net/cswikia/images/5/57/Knife_karambit_hud_outline_csgo.png/revision/latest/scale-to-width-down/400",
+    knife_m9_bayonet: "http://vignette4.wikia.nocookie.net/cswikia/images/d/d3/Csgo_knife_M9_Bayonet.png/revision/latest/scale-to-width-down/400",
+    knife_shadow_dagger: "http://vignette4.wikia.nocookie.net/cswikia/images/f/f1/Knife_push_hud_outline_csgo.png/revision/latest/scale-to-width-down/400",
+    knife_survival_bowie: "https://vignette4.wikia.nocookie.net/cswikia/images/8/8c/Survival_bowie_hud_outline.png/revision/latest/scale-to-width-down/400"
 }
 var win = gui.Window.get();
 win.width = screen.width;
@@ -83,18 +95,19 @@ server = http.createServer(function (req, res) {
 var slotted = [];
 var meth = {
 	getPlayers: function(){
-		if(this.info.allplayers) return this.info.allplayers
+		if(this.info.allplayers){
+			return this.info.allplayers
+		}
 		return false;
 	},
 	getCT: function(){
 		var all_players = [];
 		var ret = {
-			team_ct: {},
 			players: []
 		};
-		if(this.map && this.map.team_ct){
+		if(this.info.map && this.info.map.team_ct){
 			ret = $.extend({}, ret, this.info.map.team_ct);
-		}else {
+		} else {
 			return false;
 		}
 		for(var psid in this.getPlayers()){
@@ -103,19 +116,16 @@ var meth = {
 				all_players.push(curpl);
 			}
 		}
-		ret.team_ct = all_players;
+		ret.players = all_players;
 		return ret;
 	},
 	getT: function(){
 		var all_players = [];
 		var ret = {
-			team_t: {},
 			players: []
 		};
-		if(this.map && this.map.team_t){
+		if(this.info.map && this.info.map.team_t){
 			ret = $.extend({}, ret, this.info.map.team_t);
-		} else {
-			return false;
 		}
 		for(var psid in this.getPlayers()){
 			var curpl = this.getPlayers()[psid];
@@ -123,13 +133,18 @@ var meth = {
 				all_players.push(curpl);
 			}
 		}
-		ret.team_ct = all_players;
+		ret.players = all_players;
 		return ret;
 	},
 	getObserved: function(){
 		if(this.info.player.steamid != 1){
 			var csid = this.info.player.steamid;
-			if(this.getPlayers()[csid]) return this.getPlayers()[csid];
+			var cur_player = this.getPlayers()[csid];
+			if(cur_player){
+				cur_player.steamid = csid;
+				return cur_player;
+			}
+			//if(this.getPlayers()[csid]) return this.getPlayers()[csid];
 			return false;
 		}
 		return this.info.player;
@@ -147,8 +162,13 @@ var meth = {
 		if(this.info.round) return this.info.round;
 		return false;
 	},
-	map: function(){ if(this.info.map) return this.info.map;
-	return false;
+	map: function(){
+		if(this.info.map) return this.info.map;
+		return false;
+	},
+	previously: function(){
+		if(this.info.previously) return this.info.previously;
+		return false;
 	}
 }
 var integ = {
@@ -158,6 +178,7 @@ var integ = {
 
 function update(json) {
 	integ.info = json;
+	integ = $.extend({}, meth, integ);
 	if(integ.getPlayers() !== false){
 		for(var k in integ.getPlayers()){
 			slotted[integ.getPlayers()[k].observer_slot] = integ.getPlayers()[k];
@@ -204,6 +225,8 @@ function updatePage(data) {
 	var players = data.getPlayers(); //Array of other players with SteamID as key
 
 	//OBSERVED PLAYER HUD
+
+	//HERE
 
 	//HUD FOR EVERY OTHER PLAYER
 	if(players){
