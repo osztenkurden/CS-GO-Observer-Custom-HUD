@@ -1,11 +1,20 @@
 # CS:GO Observer Custom HUD
 
+Shout-out to [RedSparr0w](https://github.com/RedSparr0w) for base code and idea! You are the best, man.
+
 ## To-do before running
 - Node.js needs to be installed
 - files/cfg/gamestate_integration_observerspectator.cfg needs to be placed in cfg folder in CS:GO location
 - files/cfg/observer.cfg needs to be placed in cfg folder in CS:GO location
 - CS:GO needs to run on Fullscreen Windowed (I know people may dislike it, but since it's only for observation, soo...)
 - After running CS:GO and connecting to match (or replaying a demo, you can use this in  it too), type to console `exec observer.cfg`, it makes everything default disappear besides map and killfeed 
+
+## How I made it run?
+ - I installed Node.JS (nodejs.org)
+ - I installed NW.js (nwjs.io) to C:\nw
+ - I unpacked this whole script to C:\server
+ - I run command in cmd "C:\nw\nw.exe C:\server"
+I'm not good at this stuff, I've probably made milions of mistakes and anyone with experience could have done it better. But I was the first :)
 
 ## Main methods
 It's worth noting all methods return JSONs or `false` boolean, so be prepared for that.
@@ -181,3 +190,6 @@ function updatePage(data) {
 |phase|Team's score|```var phase = phase.phase;```|(String) freezetime/live/over/bomb/defuse|
 |phase_ends_in|Team's name|```var time = phase.phase_ends_in;//"8.9"```|(String) Time (seconds) with decimal|
 
+
+## Credits
+As I mentioned before, [RedSparr0w](https://github.com/RedSparr0w) is the man I wouldn't make it without.
