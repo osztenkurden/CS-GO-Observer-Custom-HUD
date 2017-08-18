@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+		<title>CS:GO HUD</title>
+		<script src="https://code.jquery.com/jquery-2.2.0.min.js">
+		</script>
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.5.0/css/font-awesome.min.css">
+		<link href="https://fonts.googleapis.com/css?family=Roboto" rel=
+		"stylesheet">
+	<script src="./server.js"></script>
+	<style>
+	body {
+		-webkit-user-select: none !important;	/* Chrome all / Safari all */
+		-moz-user-select: none !important;		 /* Firefox all */
+		-ms-user-select: none !important;			/* IE 10+ */
+		user-select: none !important;					/* Likely future */			
+	}
+	</style>
+</head>
+<body>
+<script>
+var fs = require('fs'),
+	gui = require('nw.gui'),
+	win = gui.Window.get();
+const dev = !!gui.App.argv.length;
+
+win.on('closed', function() {
+	tray.remove();
+	process.exit(0);
+});
+
+if (!!dev){
+	var dev_shortcut = new gui.Shortcut({
+		key : "Ctrl+Alt+Q",
+		active : function() {
+			win.showDevTools();
+		},
+		failed : function(msg) {
+			// fail to register the |key| or couldn't parse the |key|.
+			console.error(msg);
+		}
+	});
+	gui.App.registerGlobalHotKey(dev_shortcut);
+}
+
+var close_shortcut = new gui.Shortcut({
+	key : "Ctrl+Alt+C",
+	active : function() {
+		tray.remove();
+		win.close();
+		process.exit(0);
+	},
+	failed : function(msg) {
+		// fail to register the |key| or couldn't parse the |key|.
+		console.error(msg);
+	}
+});
+var min_shortcut = new gui.Shortcut({
+	key : "Ctrl+Alt+X",
+	active : function() {
+		win.minimize();
+	},
+	failed : function(msg) {
+		// fail to register the |key| or couldn't parse the |key|.
+		console.error(msg);
+	}
+});
+var menu_shortcut = new gui.Shortcut({
+	key : "Ctrl+Alt+Z",
+	active : function() {
+		$('body').load('./menu.html');
+		win.show();
+		win.focus();
+	},
+	failed : function(msg) {
+		// fail to register the |key| or couldn't parse the |key|.
+		console.error(msg);
+	}
+});
+gui.App.registerGlobalHotKey(close_shortcut);
+gui.App.registerGlobalHotKey(min_shortcut);
+gui.App.registerGlobalHotKey(menu_shortcut);
+
+var tray = new gui.Tray({ title: 'CS:GO HUD', tooltip: 'CS:GO HUD', icon: 'logo.png' });
+var menu = new gui.Menu();
+menu.append(new gui.MenuItem({
+	label: "Choose HUD",
+	click: function() {
+		$('body').load('./menu.html');
+	}
+}));
+menu.append(new gui.MenuItem({
+	label: "Close",
+	click: function() {
+		tray.remove();
+		win.close();
+		process.exit(0);
+	}
+}));
+tray.menu = menu;
+var huds = fs.readdirSync('./huds');
+$('body').load('./menu.html');
+</script>

@@ -1,0 +1,90 @@
+<style>
+@font-face {
+	font-family: 'csfont';
+	src: url('csfont.ttf') format('truetype');
+}
+
+body {
+	text-align:center;
+	background-color:rgba(0,0,0,0);
+}
+
+::-webkit-scrollbar { 
+	display: none; 
+}
+#menu {
+	width:20%;
+	margin-left:40%;
+	padding-bottom:10px;
+	background-color:#171a21;
+	color:#ecf0f1;
+	border-radius:5px;
+	font-family:csfont;
+}
+.hud {
+	position:relative;
+	margin:1.5vw;
+	width:29.9vw;
+	display:inline-block;
+	overflow:hidden;
+	cursor:pointer;
+}
+.hud h2 {
+	background-color:rgba(0,0,0,0.65);
+	position:absolute;
+	top: -50px;
+	left: 0px;
+	width: 100%;
+	color: #ecf0f1;
+	margin-top: 0px;
+	padding-top: 10px;
+	height: 30px;
+	transition: top 0.2s ease-out;
+}
+.hud:hover h2 {
+	top:0px;
+}
+.hud img {
+	width:100%;
+}
+.controls {
+	border-radius:3px;
+	padding:3px;
+	background-color:#7f8c8d;
+}
+.dev {
+	display: none;
+}
+</style>
+<script>
+String.prototype.replaceAll = function(search, replacement) {
+		var target = this;
+		return target.replace(new RegExp(search, 'g'), replacement);
+};
+for (i=0;i<huds.length;i++){
+	if (!!debug){
+		console.debug(`HUD_${i}: ${huds[i]}`);
+	}
+	$('body').append('<div class="hud" hud="'+huds[i]+'"><h2>'+huds[i].replaceAll("_"," ")+'</h2><img src="./huds/'+huds[i]+'/example.png" /></div>');
+}
+$('.hud').click(function(){
+	$('body').load('./huds/'+$(this).attr("hud")+'/index.html');
+	$('body').append('<style></style>');
+	$('style').load('./huds/'+$(this).attr("hud")+'/style.css');
+});
+if (!!dev){
+	$('.dev').fadeIn();
+}
+</script>
+<div id="menu">
+	<img style="width: 90%" src="banner.png" alt="CS:GO HUD">
+	<p>CHOOSE HUD</p>
+	<span class="controls">CTRL + ALT + Z</span>
+	<p>MINIMIZE HUD</p>
+	<span class="controls">CTRL + ALT + X</span>
+	<p>CLOSE HUD</p>
+	<span class="controls">CTRL + ALT + C</span>
+	<p class="dev">SHOW DEV CONSOLE</p>
+	<span class="controls dev">CTRL + ALT + Q</span><br/><br/>
+	<span class="controls dev"><a href="#" class="dev" onclick="debug=!debug;console.info('debug logs enabled: ' + debug);">TOGGLE DEBUG LOGS</a></span>
+</div>

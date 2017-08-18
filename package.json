@@ -1,0 +1,45 @@
+{
+  "name": "CS-GO-Observer-Custom-HUD",
+  "version": "0.0.4",
+  "description": "CSGO Custom HUD",
+  "author": "osztenkurden, based on RedSparr0w work",
+  "maintainers": [
+    "osztenkurden <osztenkurden@gmail.com>"
+  ],
+  "bugs": {
+    "url": "https://github.com/osztenkurden/CS-GO-Observer-Custom-HUD/issues",
+    "email": "osztenkurden@gmail.com"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/osztenkurden/CS-GO-Observer-Custom-HUD.git"
+  },
+  "dependencies": {
+    "install-nw": "^1.1.5"
+  },
+  "devDependencies": {},
+  "license": "MIT",
+  "scripts": {
+    "test": "nwbuild -r ./ || npm install nw-builder -g && nwbuild -r ./ || echo \u001b[31;1mEnsure you have installed Node.js then try again\u001b[0m && pause",
+    "start": "npm test",
+    "preinstall": "npm list nw-builder -g || npm install nw-builder -g || echo \u001b[31;1mEnsure you have installed Node.js then try again\u001b[0m && pause",
+    "build": "nwbuild ./ -o ../builds -p win64,win32 --winIco ./logo.ico || npm install nw-builder -g && nwbuild ./ -o ../builds -p win64,win32 --winIco ./logo.ico || echo \u001b[31;1mEnsure you have installed Node.js then try again\u001b[0m && pause",
+    "postbuild": "postbuild.bat"
+  },
+  "main": "index.html",
+  "node-main": "server.js",
+  "chromium-args": "--disable-gpu --force-cpu-draw",
+  "window": {
+    "title": "CSGO OBSEVER HUD",
+    "icon": "logo.png",
+    "toolbar": false,
+    "frame": false,
+    "width": 1920,
+    "height": 1080,
+    "position": "center",
+    "transparent": true
+  },
+  "webkit": {
+    "plugin": true
+  }
+}
