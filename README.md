@@ -9,6 +9,10 @@ Shout-out to [RedSparr0w](https://github.com/RedSparr0w) for base code and idea!
 - CS:GO needs to run on Fullscreen Windowed (I know people may dislike it, but since it's only for observation, soo...)
 - After running CS:GO and connecting to match (or replaying a demo, you can use this in  it too), type to console `exec observer.cfg`, it makes everything default disappear besides map and killfeed 
 
+## PGL's style example
+![Here](http://i.imgur.com/p9KNsHB.png)
+
+
 ## How I made it run?
  - I installed Node.JS (nodejs.org)
  - I installed NW.js (nwjs.io) to C:\nw
