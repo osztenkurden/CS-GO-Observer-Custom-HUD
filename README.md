@@ -9,6 +9,10 @@ Shout-out to [RedSparr0w](https://github.com/RedSparr0w) for base code and idea!
 - CS:GO needs to run on Fullscreen Windowed (I know people may dislike it, but since it's only for observation, soo...)
 - After running CS:GO and connecting to match (or replaying a demo, you can use this in  it too), type to console `exec observer.cfg`, it makes everything default disappear besides map and killfeed 
 
+## PGL's style example
+![Here](http://i.imgur.com/p9KNsHB.png)
+So this is possible to do with everything below.
+
 ## How I made it run?
  - I installed Node.JS (nodejs.org)
  - I installed NW.js (nwjs.io) to C:\nw
@@ -18,6 +22,10 @@ Shout-out to [RedSparr0w](https://github.com/RedSparr0w) for base code and idea!
 I'm not good at this stuff, I've probably made milions of mistakes and anyone with experience could have done it better. But I was the first :) Also if I can, I will help with problems.
 
 Somewhere there is "pgl example.zip" which contains server.js configured to look kinda-like PGL's HUD and files needed. Sorry there is such a mess :c
+
+
+## PGL's example
+I hope neither Valve or PGL will be upset about making [this example](https://mega.nz/#!HpQUFB7Q!MT1TecAVYj8xfdXt4zwyrNa2kSwxFVUdRWkrPIBbBDs), none of the images or graphics are mine btw.
 
 ## Main methods
 It's worth noting all methods return JSONs or `false` boolean, so be prepared for that.
