@@ -25,7 +25,11 @@ Somewhere there is "pgl example.zip" which contains server.js configured to look
 
 
 ## PGL's example
-I hope neither Valve or PGL will be upset about making [this example](https://mega.nz/#!HpQUFB7Q!MT1TecAVYj8xfdXt4zwyrNa2kSwxFVUdRWkrPIBbBDs), none of the images or graphics are mine btw.
+I hope neither Valve or PGL will be upset about making [this example](https://mega.nz/#!ClwDhSbD!-WtTBO2XfOVx0CW721gDCZy_gcNHdDPhZ2ye_eeAzN8), none of the images or graphics are mine btw.
+### Changelog 2017-08-25
+ - Fixed bug where going to third person mode crashes the overlay
+ - Kinda fixed bad placement of long usernames
+ - Fixed bug where death counter on players wouldn't show up
 
 ## Main methods
 It's worth noting all methods return JSONs or `false` boolean, so be prepared for that.
