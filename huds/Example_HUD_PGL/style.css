@@ -408,8 +408,8 @@
 		font-family: 'Saira Semi Condensed', sans-serif;
 		font-weight: 600;
 		font-size: 40px;
-		display: inline;
-		overflow: hidden;
+		display: inline-block;
+		white-space: nowrap;
 	}
 
 	#current_nick::before {
@@ -775,6 +775,7 @@
 		float: left;
 		margin-left: 15px;
 		width: 120px;
+		overflow: hidden;
 	}
 
 	#team-t>.player>.bar1>.hp_bar>.bar_username {
@@ -782,6 +783,7 @@
 		text-align:right;
 		margin-right: 15px;
 		width: 120px;
+		overflow: hidden;
 	}
 
 	#team-ct>.player>.bar1>.hp_bar>.bar_weapon,
