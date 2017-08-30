@@ -25,7 +25,12 @@ Somewhere there is "pgl example.zip" which contains server.js configured to look
 
 
 ## PGL's example
-I hope neither Valve or PGL will be upset about making [this example](https://mega.nz/#!ClwDhSbD!-WtTBO2XfOVx0CW721gDCZy_gcNHdDPhZ2ye_eeAzN8), none of the images or graphics are mine btw.
+I hope neither Valve or PGL will be upset about making [this example](https://mega.nz/#!b1BkFJiZ!UMqgylr6JspDldAZob_An_iwZTdeAhL-3KPUalPbHbU), none of the images or graphics are mine btw.
+
+### Changelog 2017-08-30
+ - Added working example for replacing name, logo and flag with files team1.json and team2.json, which should replace original info.
+ - If information will load with different sides, you can click Alt+Left Arrow, which will change sides of name, logo and flag. Left Alt I think.
+
 ### Changelog 2017-08-25
  - Fixed bug where going to third person mode crashes the overlay
  - Kinda fixed bad placement of long usernames
