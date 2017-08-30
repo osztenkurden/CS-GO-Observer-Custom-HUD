@@ -9,6 +9,37 @@
 		color: white;
 		background-color: rgba(0, 0, 0, 0);
 	}
+	#team_1 > #team_logo > #team_flag {
+		position: absolute;
+		z-index: -1;
+		display: block;
+		background-repeat: no-repeat;
+		background-position: 0% 50%;
+		width: 10%;
+		height: 55px;
+		background-size: 50%;
+		-webkit-filter: blur(2px);
+		-moz-filter: blur(2px);
+		-o-filter: blur(2px);
+		-ms-filter: blur(2px);
+		filter: blur(2px);
+	}
+	#team_2 > #team_logo > #team_flag {
+		position: absolute;
+		z-index: -1;
+		display: block;
+
+		background-repeat: no-repeat;
+		background-position: left center;
+		width: 10%;
+		height: 55px;
+		background-size: 50%;
+		-webkit-filter: blur(2px);
+		-moz-filter: blur(2px);
+		-o-filter: blur(2px);
+		-ms-filter: blur(2px);
+		filter: blur(2px);
+	}
 
 	::-webkit-scrollbar {
 		display: none;
