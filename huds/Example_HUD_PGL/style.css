@@ -441,10 +441,14 @@
 		font-size: 40px;
 		display: inline-block;
 		white-space: nowrap;
+		
+		background-repeat: no-repeat;
+		background-position: 0 50%;
+		background-size: 27px;
+		padding-left:36px;
 	}
 
 	#current_nick::before {
-		content: url("polishflag.png");
 		width: 27px;
 		height: 20px;
 		margin-right: 10px;
