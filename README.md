@@ -25,7 +25,11 @@ Somewhere there is "pgl example.zip" which contains server.js configured to look
 
 
 ## PGL's example
-I hope neither Valve or PGL will be upset about making [this example](https://mega.nz/#!b1BkFJiZ!UMqgylr6JspDldAZob_An_iwZTdeAhL-3KPUalPbHbU), none of the images or graphics are mine btw.
+I hope neither Valve or PGL will be upset about making [this example](https://mega.nz/#!z1BFmSLK!-flNUrbjuvhDAPkPgmh0wzgDpmJqgkoC-AlrY9ngPH8), none of the images or graphics are mine btw.
+
+### Changelog 2017-08-31
+ - Added flags to pack, so now they work
+ - Fixed bug where flag on observed player wouldn't update/show
 
 ### Changelog 2017-08-30
  - Added working example for replacing name, logo and flag with files team1.json and team2.json, which should replace original info.
