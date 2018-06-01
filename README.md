@@ -13,7 +13,7 @@ Basically, CS:GO is streaming data to local app-server, that transformes data an
 - After running CS:GO and connecting to match (or replaying a demo, you can use this in  it too), type to console `exec observer.cfg`, it makes everything default disappear besides map and killfeed 
 
 ## Configuration
-```json
+```javascript
 //config.json
 {
     "GameStateIntegrationPort":1337, //This must be the same as in gamestate_integration_observerspectator.cfg,
@@ -33,6 +33,7 @@ So this is possible to do with everything below.
  - Install NodeJS (nodejs.org)
  - Download this repo somewhere
  - Start RUN file (.bat for Windows, .sh for Linux)
+ - Run Overlay Exe from here: [OVERLAY DOWNLOAD](https://drive.google.com/file/d/12pAp3BdzFdb-wcW3DqcYJ6P-VMDzLBHu/view?usp=sharing)
  
 There are propably milions of bugs and different things, so be prepared.
 
