@@ -56,26 +56,7 @@ module.exports = {
                 let dirs = fs.readdirSync('./public/huds/'+existingHUDs[i]+'/');
                 files[existingHUDs[i]] = dirs;
             }
-            /*let tempList = hudList.map(x => x.name);
-            let huds = [];*/
-            
-            /*existingHUDs.forEach(function(hud) {
-                if(!tempList.includes(hud)){
-                    huds.push({name:hud, enabled:false});
-                }
-            }, this);*/
             return res.status(200).json({huds:existingHUDs, instances:inst, files:files})
-            /*db.insert(huds, (err, newHuds) => {
-                hudList = hudList.concat(newHuds);
-
-                for(var i = 0; i < hudList.length; i++){
-                    let files = fs.readdirSync('./public/huds/'+hudList[i].name+'/');
-                    hudList[i].files = files;
-                }
-                
-                if(err) return res.sendStatus(500);
-                return res.status(200).json({huds:hudList});
-            });*/
         }
 
         function getExistingHUDs(err, numRemoved){
