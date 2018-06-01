@@ -5,7 +5,8 @@ html
     script.
       var ip = "#{ip}",
       port = "#{port}",
-      disp_avatars = #{avatars};
+      disp_avatars = #{avatars},
+      delay = #{delay};
     script(src="/js/main.js")
     script(src=hud)
     link(rel='stylesheet', href=css)
@@ -226,7 +227,7 @@ html
           div(style='width:40%; float:right; color: #f7bf16; text-shadow: 0 0 8px black; text-align:right')
             .first_title_tm(style='width: 300px;') Equipment value:
             #eq_money_2.first_tm(style='font-weight:600') $0
-        #player6.player
+        #player1.player
           .bar1
             .hp_bar
               #hp_p.hp_el 100
@@ -247,7 +248,7 @@ html
               .kills 0
               .assists 0
               .deaths 0
-        #player7.player
+        #player2.player
           .bar1
             .hp_bar
               #hp_p.hp_el 100
@@ -268,7 +269,7 @@ html
               .kills 0
               .assists 0
               .deaths 0
-        #player8.player
+        #player3.player
           .bar1
             .hp_bar
               #hp_p.hp_el 100
@@ -289,7 +290,7 @@ html
               .kills 0
               .assists 0
               .deaths 0
-        #player9.player
+        #player4.player
           .bar1
             .hp_bar
               #hp_p.hp_el 100
@@ -310,7 +311,7 @@ html
               .kills 0
               .assists 0
               .deaths 0
-        #player0.player
+        #player5.player
           .bar1
             .hp_bar
               #hp_p.hp_el 100

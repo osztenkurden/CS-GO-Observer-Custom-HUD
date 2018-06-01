@@ -54,15 +54,24 @@ $(document).ready(function () {
             return this.info.teamList[id] || false;
         },
         getMatchType : function(){
-            return this.info.teams.match || false;
+            return (this.info.teams && this.info.teams.match ? this.info.teams.match : false);
         },
         getMatch : function(){
             return this.info.teams || false;
         },
         getPlayers: function () {
-            if (this.info.allplayers) return this.info.allplayers;
-            
-            return false;
+            if (!this.info.allplayers) return false;
+
+            let res = [];
+
+            for(var steamid in this.info.allplayers){
+                let player = this.info.allplayers[steamid];
+                if(player.observer_slot == 0) player.observer_slot = 10;
+                player.steamid = steamid;
+                res.push(player);
+            }
+            res.sort(function(a,b){return a.observer_slot - b.observer_slot})
+            return res;
         },
         getCT: function () {
             let all_players = [];
@@ -71,7 +80,8 @@ $(document).ready(function () {
             let equip_value = 0;
 
             let ret = {
-                players: []
+                players: [],
+                side:"ct"
             };
 
             if(!this.info.map || !this.info.map.team_ct) return false;
@@ -100,7 +110,8 @@ $(document).ready(function () {
             let team_money = 0;
             let equip_value = 0;
             let ret = {
-                players: []
+                players: [],
+                side:"t"
             };
 
             if (!this.info.map || !this.info.map.team_t) return false;
@@ -126,13 +137,15 @@ $(document).ready(function () {
         },
         getObserved: function () {
             if(!this.info.player || this.info.player.steamid == 1) return false;
+
             let steamid = this.info.player.steamid;
-            let player = this.getPlayers()[steamid];
+            let players = this.getPlayers();
 
-            if(!player) return false;
-
-            player.steamid = steamid;
-            return player;
+            for(var k in players){
+                if(players[k].steamid == steamid) return players[k];
+            }
+            
+            return false;
 
         },
         getPlayer: function (slot) {
@@ -176,8 +189,11 @@ $(document).ready(function () {
             if (integ.getPlayers() !== false) {
                 for (var k in integ.getPlayers()) {
                     let slot = integ.getPlayers()[k].observer_slot;
+
                     slotted[slot] = integ.getPlayers()[k];
+
                     let name = slotted[slot].name;
+
                     if(!slotted[slot].steamid){
                         slotted[slot].steamid = k;
                     }
@@ -233,9 +249,14 @@ $(document).ready(function () {
             match = data;
         });
         io.on("update", function (json) {
+
             json.teams = match;
-            create(json, players, teams);
-            updatePage(integ);
+            if(delay >= 0){
+                setTimeout(function(){
+                    create(json, players, teams);
+                    updatePage(integ);
+                }, delay*1000);
+            }
         });
         io.on('refresh', function(data){
             location.reload();

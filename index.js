@@ -76,7 +76,11 @@ app.get('/huds/:id([^\\\/]+)', huds.render);
 
 app.get('/api/huds', huds.getHUDs);
 
-app.post('/api/huds', huds.setHUD);
+app.post('/api/huds', huds.addHUD);
+
+app.patch('/api/huds', huds.setHUD);
+
+app.delete('/api/huds', huds.deleteHUD);
 
 app.get('/teams', teams.render);
 

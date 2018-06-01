@@ -23,22 +23,49 @@ module.exports = {
             return config;
         }
     },
+    addHUD : (req, res) => {
+        if(!fs.existsSync('./public/huds')) return res.sendStatus(500);
+
+        let existingHUDs = fs.readdirSync('./public/huds').filter(function (file) {
+            return fs.statSync('./public/huds/'+file).isDirectory();
+        });
+
+        let instance = req.body; //name of instance, name of hud, seconds of delay;
+
+        if(!existingHUDs.includes(instance.hud)) return res.sendStatus(500);
+        
+        db.insert(instance, (err, newHUD) => {
+            if(err) return res.sendStatus(500);
+
+            return res.status(200).json({id:newHUD["_id"]});
+        });
+
+    },
     getHUDs : (req, res) => {
         if(!fs.existsSync('./public/huds')) return res.sendStatus(500);
 
         let existingHUDs = fs.readdirSync('./public/huds').filter(function (file) {
             return fs.statSync('./public/huds/'+file).isDirectory();
         });
-        function addNewHUDs(err, hudList){
-            let tempList = hudList.map(x => x.name);
-            let huds = [];
+        function getInstances(err, inst){
+            if(err) return res.sendStatus(500);
+
+            let files = {};
+
+            for(var i = 0; i < existingHUDs.length; i++){
+                let dirs = fs.readdirSync('./public/huds/'+existingHUDs[i]+'/');
+                files[existingHUDs[i]] = dirs;
+            }
+            /*let tempList = hudList.map(x => x.name);
+            let huds = [];*/
             
-            existingHUDs.forEach(function(hud) {
+            /*existingHUDs.forEach(function(hud) {
                 if(!tempList.includes(hud)){
                     huds.push({name:hud, enabled:false});
                 }
-            }, this);
-            db.insert(huds, (err, newHuds) => {
+            }, this);*/
+            return res.status(200).json({huds:existingHUDs, instances:inst, files:files})
+            /*db.insert(huds, (err, newHuds) => {
                 hudList = hudList.concat(newHuds);
 
                 for(var i = 0; i < hudList.length; i++){
@@ -48,29 +75,33 @@ module.exports = {
                 
                 if(err) return res.sendStatus(500);
                 return res.status(200).json({huds:hudList});
-            });
+            });*/
         }
 
         function getExistingHUDs(err, numRemoved){
             if(err) return res.sendStatus(500);
 
-            db.find({}, addNewHUDs);
+            db.find({}, getInstances);
         }
-        db.remove({ name: { $nin: existingHUDs }}, { multi: true }, getExistingHUDs);
+        db.remove({ hud: { $nin: existingHUDs }}, { multi: true }, getExistingHUDs);
     },
     setHUD : (req, res) => {   
         let data = req.body;
 
-        let id = data.id;
-        let enabled = data.enabled;
-
-        if(!id || enabled == null) return res.sendStatus(500);
-        db.update({ _id: id }, { $set: {enabled: enabled}}, {}, (err, numReplaced) => {
+        if(!data.id || data.enabled == null || !data.name || data.delay == null) return res.sendStatus(500);
+        db.update({ _id: data.id }, { $set: {enabled: data.enabled, name:data.name, delay:data.delay}}, {}, (err, numReplaced) => {
             if(err) return res.sendStatus(500);
             return res.sendStatus(200);
         });
     },
+    deleteHUD : (req, res) => {
+        let id = req.body.id;
 
+        db.remove({_id:id}, {}, (err, numRemoved) => {
+            if(err || numRemoved != 1) return res.sendStatus(500);
+            return res.sendStatus(200);
+        });
+    },
     render: (req, res) => {
         let config = module.exports.loadConfig();
         let id = req.params.id;
@@ -80,18 +111,19 @@ module.exports = {
 
             let hud = huds[0];
 
-            if(!fs.existsSync('./public/huds/default') || !fs.existsSync('./public/huds/' + hud.name + '/template.pug')) return res.sendStatus(500);
+            if(!fs.existsSync('./public/huds/default') || !fs.existsSync('./public/huds/' + hud.hud + '/template.pug')) return res.sendStatus(500);
             if(!hud.enabled) return res.redirect('/#huds');
 
-            let hud_dir = "/huds/" + hud.name + "/index.js";
-            let css_dir = "/huds/" + hud.name + "/style.css";
+            let hud_dir = "/huds/" + hud.hud + "/index.js";
+            let css_dir = "/huds/" + hud.hud + "/style.css";
 
-            return res.render('../public/huds/' + hud.name + '/template.pug', {
+            return res.render('../public/huds/' + hud.hud + '/template.pug', {
                 ip: config.Address,
                 port: config.ServerPort,
                 avatars: config.DisplayAvatars,
                 hud: hud_dir,
-                css: css_dir
+                css: css_dir,
+                delay: hud.delay
             });
         }
 

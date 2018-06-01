@@ -65,18 +65,36 @@ function fillObserved(player) {
         $("#avatar_container").html($("<img />").attr("src", "/av/"+player.steamid));
     });
 }
-function fillPlayer(player){
+function fillPlayers(teams){
+    for(var i = 0; i < 5; i++){
+        if(i >=teams.left.players.length){
+            $("#left").find("#player"+(i+1)).css("opacity", "0");
+        } else{
+            fillPlayer(teams.left.players[i],i, "left", teams.left.players.length);
+            $("#left").find("#player"+(i+1)).css("opacity","1");
+        }
+    }
+    for(var i = 0; i < 5; i++){
+        if(i >=teams.right.players.length){
+            $("#right").find("#player"+(i+1)).css("opacity","0");
+        } else{
+            fillPlayer(teams.right.players[i],i, "right", teams.right.players.length);
+            $("#right").find("#player"+(i+1)).css("opacity","1");
+        }
+    }
+}
+function fillPlayer(player,nr, side, max){
     let slot = player.observer_slot;
     let statistics = player.getStats();
     let weapons = player.getWeapons();
     let steamid = player.steamid;
 
     let team = player.team.toLowerCase();
-    let side =  slot >= 1 && slot <= 5 ? "left":"right";
-    
+
     let health_color = statistics.health <= 20 ? "#e74c3c" : team == "ct" ? "#5788a8":"#c19511";
 
-    let $player = $("#"+side).find("#player"+slot);
+    let $player = $("#"+side).find("#player"+(nr+1));
+
     let $bottom = $player.find(".bottom_bar");
     let $top = $player.find(".bar1");
 
@@ -183,7 +201,7 @@ function updatePage(data) {
     
     var matchup = data.getMatchType();
     var match = data.getMatch();
-    if(matchup){
+    if(matchup && matchup.toLowerCase() != "none"){
         var block = $("<div class='block'></div>");
         var left_bl = $("<div></div>");
         var right_bl = $("<div></div>");
@@ -199,6 +217,7 @@ function updatePage(data) {
     } else {
         $("#match_tournament").hide();
     }
+        console.log(matchup)
 
     if (observed.steamid == 1 || !observed) {
         $("#player-container").css("opacity", "0");
@@ -223,7 +242,6 @@ function updatePage(data) {
     var team_ct = data.getCT();
     var team_t = data.getT();
     var test_player2 = data.getPlayer(1);
-
     var tscore = [];
     $("body").css("display", !map || menu
         ? "none"
@@ -251,6 +269,15 @@ function updatePage(data) {
 
         teams.left.logo = team_one.logo || null;
         teams.right.logo = team_two.logo || null;
+
+        teams.left.map_score = team_one.map_score || 0;
+        teams.right.map_score = team_two.map_score || 0;
+
+        teams.left.side = left.side || null;
+        teams.right.side = right.side || null;
+
+        teams.left.players = left.players || null;
+        teams.right.players = right.players || null;
 
         $("#match_one_info")
             .removeClass("ct t")
@@ -324,15 +351,20 @@ function updatePage(data) {
 
     //EVERY OTHER PLAYER
     if (players) {
-        for (var steamid in players) {
-            if (avatars[steamid] != true && disp_avatars) 
-                loadAvatar(steamid);
-            let player = players[steamid];
-            fillPlayer(player);
+        
+        var offset = 0;
+        for (var sl in players) {
+            let player = players[sl];
+            if (avatars[player.steamid] != true && disp_avatars) 
+                loadAvatar(player.steamid);
+            
+            if(player.observer_slot <= 5 && offset == 0 && player.team.toLowerCase() != teams.left.side)
+                offset = 6 - sl;
         }
+        fillPlayers(teams)
     }
 
-    //PHASES
+    //PHASESc
     if (phase) {
         $("#time_counter").css("color", (phase.phase == "live" || phase.phase == "over" || phase.phase == "warmup" || (phase.phase == "freezetime" && phase.phase_ends_in > 10))
             ? "white"

@@ -145,39 +145,99 @@ function loadPlayers(callback){
 
 function loadHUDs(callback){
     $.get("/api/huds", function (data) {
-        callback(data.huds);
+        callback(data);
     });
 }
 
-function listHUDs(cb){
-
-    loadHUDs(function(huds){
-        $hudsTable = $("#huds tbody");
-        $hudsTable.html("");
-
-        huds.forEach(function(hud, id) {
-            let $row = $("<tr data-hid='" + hud._id + "'><td>" + hud.name + "</td><td><a href ='http://" + ip + ":" + port + "/huds/" + hud._id + "'>/huds/" + hud._id + "</a></td><td><div class='switch'><label>Off<input type='checkbox'><span class='lever'></span>On</label></div></td><td id='warnings'></td></tr>");
-            if(hud.enabled == true) $row.find("input").prop("checked","true");
-
-            $row.find("#warnings").append((!hud.files.includes("template.pug") ? '<p>Missing template.pug<p>' : "") + (!hud.files.includes("index.js") ? '<p>Missing index.js<p>' : "") + (!hud.files.includes("style.css") ? '<p>Missing style.css<p>' : ""));
-
-            $hudsTable.append($row);
-        }, this);
-        cb();
-    });
-}
-
-function setHUD(id, enabled){
+function addHUD(data, callback){
     $.ajax({
         type: "POST",
         url: "/api/huds",
         contentType: 'application/json',
-        data: JSON.stringify({
-            id:id,
-            enabled:enabled
-        }),
+        data: JSON.stringify(data),
+        success: function(res){
+            listHUDs(callback);
+        }
+    });
+}
+function deleteHUD(instanceId, callback){
+    $.ajax({
+        type: "DELETE",
+        url: "/api/huds",
+        data: {id:instanceId},
+        success: function(res){
+            listHUDs(callback);
+        }
+    });
+}
+
+function listHUDs(cb){
+    loadHUDs(function(res){
+        let huds = res.huds;
+        let instances = res.instances;
+        let files = res.files;
+
+        let $instance_example, $hud_example;
+        
+        $instance_example = $("#instance").clone();
+        $hud_example = $("#hud").clone();
+        let $instance = $("#instance").clone().attr("id", "");
+        let $hud = $("#hud").clone().attr("id", "");
+
+        let hudList = {};
+
+        instances.forEach(function(el) {
+            if(!hudList[el.hud]) hudList[el.hud] = [];
+            hudList[el.hud].push(el);
+        }, this);
+
+        $hudsTable = $("#huds tbody");
+        $hudsTable.html("");
+        $hudsTable.append($instance_example.hide());
+        $hudsTable.append($hud_example.hide());
+        
+        huds.forEach(function(hud) {
+            let $hudRow = $hud.clone().show().appendTo("<tr></tr>");
+            $hudRow.find("th:eq(0)").text(hud)
+
+            $hudsTable.append($hudRow);
+            if(hudList[hud]){
+                hudList[hud].forEach(function(inst) {
+                    let $temp = $instance.clone();
+                    
+                    $temp.show();
+                    $temp.find("#name").val(inst.name);
+                    $temp.appendTo($("<tr></tr>")).attr("data-hid", inst._id).appendTo($hudsTable);
+                    $temp.find('#delay').val(inst.delay);
+                    $temp.find("td:eq(3)").html("<a href='/huds/" + inst._id + "'>/huds/" + inst._id + "</a>");
+                    $temp.find("#warnings").html('<i class="material-icons">done</i>')
+
+                    if(inst.enabled == true) $temp.find("input[type='checkbox']").prop("checked","true");
+                }, this);
+            }
+            let $status = $hudRow.find("#warnings i");
+            if(!files[hud].includes("template.pug") ||  !files[hud].includes("index.js") || !files[hud].includes("style.css")){
+                let tip = "Missing files:" + (!files[hud].includes("template.pug") ? ' template.pug,' : "") + (!files[hud].includes("index.js") ? ' index.js,' : "") + (!files[hud].includes("style.css") ? ' style.css,' : "");
+                $status.addClass("tooltipped").attr({"data-position":"top", "data-tooltip":tip.substr(0, tip.length -1)}).text("warning")
+            } else {
+                $status.removeClass("tooltipped").text("done_all");
+            }
+        }, this);
+        if(typeof cb == "function") cb();
+    });
+}
+
+function setHUD(data){
+    $.ajax({
+        type: "PATCH",
+        url: "/api/huds",
+        contentType: 'application/json',
+        data: JSON.stringify(data),
         error: function(){
-            $("tr[data-hid='" + id + "']").find("input").prop("checked", !enabled);
+            $("tr[data-hid='" + data.id + "']").find("#warnings").html('<i class="material-icons tooltipped" data-position="top" data-tooltip="Error during request">error_outline</i>');
+        },
+        success: function(){
+            $("tr[data-hid='" + data.id + "']").find("#warnings").html('<i class="material-icons">done</i>');
         }
     });
 }
