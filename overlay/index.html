@@ -1,0 +1,30 @@
+<html>
+<head>
+</head>
+<body>
+<script>
+var gui = require('nw.gui');
+var ip = require('ip');
+var fs = require('fs');
+var path = require("path"); 
+var port = 2626, address = ip.address();
+
+var win = gui.Window.get();
+win.width = screen.width;
+win.height = screen.height;
+
+if(!fs.existsSync(path.dirname(process.execPath)+ '\\config.json')) win.close(true);
+var config = fs.readFileSync(path.dirname(process.execPath)+ '\\config.json', 'utf8');
+
+try{
+    config = JSON.parse(config);
+    if(config.port) port = config.port;
+    if(config.address) address = config.address;
+} catch(e){
+    win.close(true);
+}
+    
+win.setAlwaysOnTop(true);
+window.location.replace("http://" + address + ":" + port+"/huds");
+</script>
+</html>

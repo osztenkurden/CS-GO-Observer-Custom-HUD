@@ -1,0 +1,40 @@
+.row
+		form(enctype="multipart/form-data").col.s12
+			.row
+				.input-field.col.s12.m12
+					select#teams
+						option(value='default', selected='') New team
+				.input-field.col.s12.m6
+					input#team_name.validate(placeholder='Team Name', type='text', name="team_name")
+					input#id(type='hidden', name="_id")
+					label(for='team_name') Team Name
+				.input-field.col.s12.m6
+					input#short_name.validate(placeholder='Short Name', type='text', name="short_name")
+					label(for='short_name') Short Name
+				.input-field.col.s12.m6
+					select(name="country_code")#flags.icons
+						option(value='default', selected='') No flag
+						for k in flags
+							option(data-icon="/files/img/flags/"+k+".png", value=k)= k
+					label Images in select
+				.input-field.col.s12.m6
+					.file-field.input-field
+						.btn
+							span File
+							input#logo(type='file', name='logo')
+						.file-path-wrapper
+							input.file-path.validate(type='text')
+				.input-field.col.s12.m6
+					.col.s12.m6
+						.card-panel.grey.lighten-5.z-depth-1
+							.row
+								.col.s12
+									img.circle.responsive-img#logo_img(alt='')
+									// notice the "circle" class
+							.row
+								.col.s12
+									span.black-text
+										a.waves-effect.waves-light.btn#delete_logo Delete logo
+				.input-field.col.s12
+					a.waves-effect.waves-light.btn#save_team Save team
+					a.waves-effect.waves-light.btn.disabled#delete_team Delete team

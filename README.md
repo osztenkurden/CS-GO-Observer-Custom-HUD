@@ -2,46 +2,60 @@
 
 Shout-out to [RedSparr0w](https://github.com/RedSparr0w) for base code and idea! You are the best, man.
 
+## How does it work?
+Basically, CS:GO is streaming data to local app-server, that transformes data and then load it to local webpage.
+
 ## To-do before running
 - Node.js needs to be installed
-- files/cfg/gamestate_integration_observerspectator.cfg needs to be placed in cfg folder in CS:GO location
-- files/cfg/observer.cfg needs to be placed in cfg folder in CS:GO location
+- public/files/cfg/gamestate_integration_observerspectator.cfg needs to be placed in cfg folder in CS:GO location
+- public/files/cfg/observer.cfg needs to be placed in cfg folder in CS:GO location
 - CS:GO needs to run on Fullscreen Windowed (I know people may dislike it, but since it's only for observation, soo...)
 - After running CS:GO and connecting to match (or replaying a demo, you can use this in  it too), type to console `exec observer.cfg`, it makes everything default disappear besides map and killfeed 
+
+## Configuration
+```json
+//config.json
+{
+    "GameStateIntegrationPort":1337, //This must be the same as in gamestate_integration_observerspectator.cfg,
+    "ServerPort":2626, //Some free port on your PC
+    "SteamApiKey":"ABCDEFGIJK12345678", //Steam API Key, without it avatars won't work
+    "DisplayAvatars":true, // true for yes, false for no
+    "AvatarDirectory":"./public/files/avatars/", // Local storage for avatars
+    "GSIToken":"120987" //This must be the same as in gamestate_integration_observerspectator.cfg
+}
+```
 
 ## PGL's style example
 ![Here](http://i.imgur.com/p9KNsHB.png)
 So this is possible to do with everything below.
 
-## How I made it run?
- - I installed Node.JS (nodejs.org)
- - I installed NW.js (nwjs.io) to C:\nw
- - I unpacked this whole script to C:\server
- - I run command in cmd "C:\nw\nw.exe C:\server"
+## How to make it run?
+ - Install NodeJS (nodejs.org)
+ - Download this repo somewhere
+ - Start RUN file (.bat for Windows, .sh for Linux)
  
-I'm not good at this stuff, I've probably made milions of mistakes and anyone with experience could have done it better. But I was the first :) Also if I can, I will help with problems.
+There are propably milions of bugs and different things, so be prepared.
 
-Somewhere there is "pgl example.zip" which contains server.js configured to look kinda-like PGL's HUD and files needed. Sorry there is such a mess :c
+## Admin Panel
+After starting the code go to address showing up in terminal/command prompt. You should see Admin Panel divided in three parts - Teams, Players, Create Match and HUDs. In here you can manage data used in HUDs during match ups.
+#### Teams tab
+You can here define teams, their name, short names (actually short names are not use anywhere for now), their country flag and logo. Files for teams' logos are being held in `public/teams/` and their filename should start from `logo-`.
+#### Players tab
+In Players tab you can define player's real name, displayed name, country flag (can also be set to "The same as team"), their team and, to identify players, SteamID64.
+### Create match tab
+Here you can set type of match - is this a map of BO2, BO3 or BO5, score for teams and which team it should load to HUD. In case players are on the wrong side (left/right) there is `SWAP` button to quickly tell the HUD to swap teams' name, logo and flag.
+Additionaly, if during the match you decide that there is a type in team's or player's information, you can change it (for example on mobile phone, if you allow Node through firewall and you are on the same local network) and then in this tab click the `Force Refresh HUD`, to make sure all the changes are applied.
+### HUDS
+This tab shows local HUDs. They are not validated whether or not they actually work, but if any of the files is missing, it will notify you in Warnings column.
+You can enable/disable each HUD to make it accessible or not. There is also HUD URL information - if you click it, it will redirect you to local webpage, that's serving as a HUD. It is useful if streamer wants to stream HUD separately - for example it can be added in OBS as Browser Source, then you just need to set it to HUD's URL.
+It might be useful for bigger streaming workspaces, like for setups with different PC dedicated to replays - one server app will manage every HUD on local network, because all HUDs are available all the time, if they are not disabled.
+## How to create your own HUD
+Go to `public/huds` and copy and paste `default` folder and rename it to your heart's content - that's how your HUD will display in Admin Panel.
+`template.pug` - template of your HUD in PUG, required.
+`style.css` - css to your template, reccomended.
+`index.js` - engine of your HUD. Look at the default one and at the template to get the idea how it works.
 
-
-## PGL's example
-I hope neither Valve or PGL will be upset about making [this example](https://mega.nz/#!z1BFmSLK!-flNUrbjuvhDAPkPgmh0wzgDpmJqgkoC-AlrY9ngPH8), none of the images or graphics are mine btw.
-
-### Changelog 2017-08-31
- - Added flags to pack, so now they work
- - Fixed bug where flag on observed player wouldn't update/show
-
-### Changelog 2017-08-30
- - Added working example for replacing name, logo and flag with files team1.json and team2.json, which should replace original info.
- - If information will load with different sides, you can click Alt+Left Arrow, which will change sides of name, logo and flag. Left Alt I think.
-
-### Changelog 2017-08-25
- - Fixed bug where going to third person mode crashes the overlay
- - Kinda fixed bad placement of long usernames
- - Fixed bug where death counter on players wouldn't show up
-
-## Main methods
-It's worth noting all methods return JSONs or `false` boolean, so be prepared for that.
+In `index.js` the most important part is `updatePage()` function. It is required for any HUD to work, because this function is called when data is coming from CS:GO. 
 
 All of main action that will take place on your screen happens in `updatePage()` function, so when you want to represent some information you will need to write your code within its boundaries.
 ```javascript
@@ -49,8 +63,7 @@ function updatePage(data) {
 	//Here happens magic
 }
 ```
-`data`
-variable is being passed to it, and from that we can take actions, such as getting informations about players, map, round phases, etc. Below you will find detailed information about received information :>
+`data` argument is being passed to it, and from that we can take actions, such as getting informations about players, map, round phases, etc. Below you will find detailed information about received information :>
 
 ### `data`
 
@@ -60,11 +73,16 @@ Methods to obtain different objects:
 
 |Method|Description|Example|Returned objects|
 |---|---|---|---|
+|`getTeamOne()`|Information about Team 1 defined in Admin Panel|`var teamOne = data.getTeamOne();`|JSON:`{team_name: "SK Gaming", short_name: "sk", country_code: "Brazil", logo: "logo-1527775279488.png", _id: "MT3xr6mb37o8Vbe3"}`|
+|`getTeamTwo()`|Information about Team 2 defined in Admin Panel|`var players = data.getTeamTwo();`|As above|
+|`loadTeam(id)` id: String |Information about team defined in Admin Panel with given id|`var players = data.loadTeam("MT3xr6mb37o8Vbe3");`|As above|
+|`getMatchType()`|Information which matchup type is this|`var matchup = data.getMatchType();`|String: `bo2`, `bo3` lub `bo5`|
+|`getMatch()`|Information about match set up in panel|`var match = data.getMatch();`|JSON: `{match: "bo5", team_1: {map_score:1, team:"auto"}, team_2: {map_score:1, team:"MT3xr6mb37o8Vbe3"}}`|
 |`getPlayers()`|List of players|`var players = data.getPlayers();`|(Array of Players)|
 |`getCT()`|CT's informations|`var ct = data.getCT();`|(Team)|
 |`getT()`|T's informations|```var t = data.getT();```|(Team)|
 |`getObserved()`|Currently spectated player|```var player = data.getObserved();```|(Player) If you are not spectating anyone, returned Player will have Steam ID 1 and name GOTV|
-|`getPlayer(int observer_slot)`|Player with given observation slot (o-9)|```var first = data.getPlayer(1);```|(Player)|
+|`getPlayer(observer_slot)` observer_slot: Int|Player with given observation slot (o-9)|```var first = data.getPlayer(1);```|(Player)|
 |`phase()`|Game's current phase|```var phase = data.phase();```|(Phase)|
 |`round()`|Round's information|```var round = data.round();```|(Round)|
 |`map()`|Map's information|```var map = data.map();```|(Map)|
@@ -74,22 +92,34 @@ Methods to obtain different objects:
 Example:
 ```javascript
 function updatePage(data) {
-	var player = data.getObserved(); //Getting spectated players object
-    var team_ct = data.getCT(); //CT's informations
-    var team_t = data.getT(); //T's informations
+	var player = data.getObserved(); // Getting spectated players object
+    var teamLeft = data.getTeamOne(); // Team 1's informations
+    var teamRight = data.getTeamTwo(); // Team 2's informations
     
     var round = data.round();
     
-    $("#team_ct_name").html(team_ct.name); //Setting ct's name
-    $("#team_ct_score").html(team_ct.score); //Setting t's name
+    // Setting teams' names
+    $("#team_one_name").html(teamLeft.team_name); 
+    $("#team_two_score").html(teamRight.team_name);
+    // Those might be null if none specified, then use getT() and getCT() 
+    
+    //Setting teams' flag
+    if(teamLeft.country_code){
+        $("#team_1 #team_flag").css("background-image", "url('/files/img/flags/"+teamLeft.country_code + ".png');
+    }
+    if(teamRight.country_code){
+        $("#team_2 #team_flag").css("background-image", "url('/files/img/flags/"+teamRight.country_code + ".png');
+    }
     
     var playerlist = data.getPlayers(); // Array of player objects
-    for(var steamid in playerlist){
-    	/* Actions here will be taken for each player */
-        var cur_player = playerlist[steamid];
-      	
-        var cur_name = cur_player.name;
-        var cur_stats = cur_player.getStats();
+    if(playerlist){
+        for(var steamid in playerlist){
+        	/* Actions here will be taken for each player */
+            let player = playerlist[steamid];
+            
+            let displayed_name = player.name;
+            let real_name = player.real_name; // If real name isn't set, it will show player.name
+        }
     }
     
     
@@ -105,10 +135,13 @@ Properties
 |Property|Description|Example|Values|
 |---|---|---|---|
 |name|Player's steam name|```var name = player.name;//OLOF```|(String)|
-|clan|Player's current shown clan tag|```var clan = player.clan;//OLOF```|(String) or (NULL)|
+|real_name|Player's real name, if set up in panel|```var real_name = player.name;//Olof Kajbjer Gustafsson```|(String)|
+|clan|Player's current shown clan tag|```var clan = player.clan;//fnatic```|(String) or (NULL)|
 |observer_slot|Player's spectating number|```var slot = player.observer_slot;//3```|(int) 0-9|
 |team|Player's side|```var team = player.team;//CT```|(String) CT/T|
 |position|Player's current position on map|```var pos = player.position;//-663.10, -198.32, 16.03```|(String) x, y, z|
+|steamid|Player's SteamID64|```var sid = player.steamid;//76561197988627193```|(String)|
+|teamData|Player's personal team information, if set up in panel|```var team = player.teamData;```|(JSON):```{team_name: "SK Gaming", short_name: "sk", country_code: "Brazil", logo: "logo-1527775279488.png", _id: "MT3xr6mb37o8Vbe3"}```|
 
 Example:
 ```javascript
@@ -171,7 +204,6 @@ function updatePage(data) {
 ```
 
 ### Weapon
-
 |Property|Description|Example|Values|
 |---|---|---|---|
 |name|Weapon's asset name|```var name = weapon.name;//weapon_awp```|(String) weapon\_...|
@@ -192,6 +224,7 @@ function updatePage(data) {
 |num_matches_to_win_series|How many matches needed to win series|```var need = map.num_matches_to_win_series;```|(int)|
 |current_spectators|Number of current live spectators|```var spec = map.current_spectators;```|(int)|
 |souvenirs_total|Number of dropped souvenirs (majors)|```var souv = map.souvenirs_total;```|(int)|
+
 ### Round
 |Property|Description|Example|Values|
 |---|---|---|---|
@@ -207,6 +240,8 @@ function updatePage(data) {
 |flag|Team's flag|```var flag_ct = team.flag;```|(String) ISO 3166 Country Code|
 |timeouts_remaining|Team's remaining timeouts|```var timeouts_t = team.timeouts_remaining;```|(int)|
 |matches_won_this_series|Matches won this series by this team|```var won_ct = team.matches_won_this_series;```|(int)|
+|equip_value|Equipment value of team|```var ct_value = team.equip_value;```|(int)|
+|team_money|Sum of  team's players' money|```var ct_money = team.team_money;```|(int)|
 
 ### Phase
 |Property|Description|Example|Values|
@@ -214,6 +249,46 @@ function updatePage(data) {
 |phase|Team's score|```var phase = phase.phase;```|(String) freezetime/live/over/bomb/defuse|
 |phase_ends_in|Team's name|```var time = phase.phase_ends_in;//"8.9"```|(String) Time (seconds) with decimal|
 
+# API Requests to databases
+### Player object example
+```json
+{
+    "sid":"76561198029090368",
+    "real_name":"Hubert Walczak",
+    "displayed_name":"osztenkurden",
+    "country_code":"Poland",
+    "team":"MT3xr6mb37o8Vbe3"
+}
+```
+### Team object example
+```json
+{
+    "team_name":"SK Gaming",
+    "short_name":"sk",
+    "country_code":"Brazil",
+    "logo":"logo-1527775279488.png"
+}
+```
+### HUD object example
+```json
+{
+    "name":"default",
+    "enabled":false
+}
+```
 
+|URL|Method|Request body|Response|
+|---|--|--|---|
+|`/api/players`|GET||`{players:[Array of Player objects with unique _id property]}` or `Status 500`|
+|`/api/players`|POST|`Player object`| `{id:String}`, specifying new unique _id or Status `500`|
+|`/api/players`|PATCH|`Player object with _id property`|Status `200` or `500`|
+|`/api/players`|DELETE|`{userId: String}`|Status `200` or `500`|
+|`/api/teams`|GET||`{players: [Array of Player objects with unique _id property]}` or `Status 500`|
+|`/api/teams`|POST|`FormData` object with fields: team_name, short_name, country_code, logo| `{id:String}`, specifying new unique _id or Status `500`|
+|`/api/teams`|PATCH|`FormData` object with fields: team_name, short_name, country_code, logo|Status `200` or `500`|
+|`/api/teams`|DELETE|`{teamId: String}`|Status `200` or `500`|
+|`/api/teams_logo`|DELETE|`{teamId: String}`|Status `200` or `500`|
+|`/api/huds`|GET||`{players: [Array of HUD objects with unique _id property]}` or `Status 500`|
+|`/api/huds`|POST|`{id: String, enabled: Boolean}`| Status `200` or `500`|
 ## Credits
 As I mentioned before, [RedSparr0w](https://github.com/RedSparr0w) is the man I wouldn't make it without.

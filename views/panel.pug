@@ -1,0 +1,46 @@
+.row
+	.col.s12(style="text-align:center;")
+		.input-field.col.s12
+			select#botype
+				option(value='', disabled='', selected='') Choose your option
+				option(value=null) None
+				option(value='bo2') Best Of 2
+				option(value='bo3') Best Of 3
+				option(value='bo5') Best Of 5
+			label Choose type (in BO1 bar doesnt show)
+		.col.s12.m6
+			.row
+				h3 Team 1
+				.input-field.col.s12
+					select#team_1_score
+						option(value='0', selected) 0
+						option(value='1') 1
+						option(value='2') 2
+						option(value='3') 3
+					label Map wins for team 1
+			.row
+				.input-field.col.s12
+					select#team_1.icons
+						option(value=null) NONE
+						option(value='auto', selected) Try to match team automatically
+					label Set team 1
+		.col.s12.m6
+			.row
+				h3 Team 2
+				.input-field.col.s12
+					select#team_2_score
+						option(value='0', selected) 0
+						option(value='1') 1
+						option(value='2') 2
+						option(value='3') 3
+					label Map wins for team 2
+			.row
+				.input-field.col.s12
+					select#team_2.icons
+						option(value=null) NONE
+						option(value='auto', selected) Try to match team automatically
+					label Set team 2
+		.input-field.col.s12
+			a.waves-effect.waves-light.btn#set Set
+			a.waves-effect.waves-light.btn#swap Swap
+			a.waves-effect.waves-light.btn#ref Force refresh HUD

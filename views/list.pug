@@ -1,0 +1,19 @@
+doctype html
+html
+  head
+    script(src="http://code.jquery.com/jquery-2.1.4.min.js")
+    script(src="/js/materialize.min.js")
+    script(src="/js/functions.js")
+    script(src="/js/list.js")
+    link(rel='stylesheet', href='/css/materialize.min.css')
+    meta(name='viewport', content='width=device-width, initial-scale=1.0')
+  body
+    container
+      .row
+        .col.s12.m4.offset-m4#list(style="margin-top: 100px")
+          .card.horizontal#example
+            .card-stacked
+              .card-content
+                p
+              .card-action
+                a(href='#') Go to HUD

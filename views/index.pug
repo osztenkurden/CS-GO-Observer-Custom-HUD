@@ -1,0 +1,56 @@
+doctype html
+html
+	head
+	script(src="https://cdn.socket.io/socket.io-1.3.7.js")
+	script(src="https://code.jquery.com/jquery-3.2.1.min.js")
+	script.
+		var ip = "#{ip}",
+		port = "#{port}";
+	script(src="/js/panel.js")
+	script(src="/js/functions.js")
+	script(src="/js/teams.js")
+	script(src="/js/players.js")
+	script(src="/js/huds.js")
+	script(src="/js/materialize.min.js")
+	link(rel='stylesheet', href='/css/materialize.min.css')
+	link(href='https://fonts.googleapis.com/icon?family=Material+Icons', rel='stylesheet')
+
+	meta(name='viewport', content='width=device-width, initial-scale=1.0')
+
+	body
+		.container
+				.row
+					.col.s12
+						ul.tabs
+							li.tab.col.s3
+								a.active(href='#team_panel') Teams
+							li.tab.col.s3
+								a(href='#player_panel') Players
+							li.tab.col.s3
+								a(href='#match') Create match
+							li.tab.col.s3
+								a(href='#huds') HUDs
+					#team_panel.col.s12
+						include teams.pug
+					#player_panel.col.s12
+						include players.pug
+					#match.col.s12
+						include panel.pug
+					#huds.col.s12
+						include huds.pug
+	script.
+		$('select').formSelect();
+		$('.dropdown-button').dropdown({
+			inDuration: 300,
+			outDuration: 225,
+			constrainWidth: false, // Does not change width of dropdown to that of the activator
+			hover: false, // Activate on hover
+			gutter: 0, // Spacing from edge
+			belowOrigin: false, // Displays dropdown below the button
+			alignment: 'center', // Displays dropdown with edge aligned to the left of button
+			stopPropagation: false // Stops event propagation
+		}
+		);
+		$(document).ready(function(){
+		$('.tabs').tabs();
+		});

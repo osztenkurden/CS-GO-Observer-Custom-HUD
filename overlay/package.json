@@ -1,0 +1,21 @@
+{
+  "main": "index.html",
+  "name": "csgo-overlay-for-custom-hud",
+  "version": "1.0.0",
+  "chromium-args": "--disable-gpu --force-cpu-draw",
+  "dependencies": {
+    "install-nw": "^1.1.5",
+    "ip": "latest",
+    "fs": "latest",
+    "path":"latest"
+  },
+  "window": {
+    "title": "CSGO OVERLAY FOR CUSTOM HUD",
+    "toolbar": false,
+    "frame": false,
+    "width": 1920,
+    "height": 1080,
+    "position": "center",
+    "transparent": true
+  }
+}

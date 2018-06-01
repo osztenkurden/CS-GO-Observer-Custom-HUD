@@ -1,0 +1,28 @@
+.row
+	.form.col.s12
+		.row
+			.input-field.col.s12.m12
+				select#players
+					option(value='default', selected='') New player
+			.input-field.col.s12.m6
+				input#real_name.validate(placeholder='Real Name', type='text', name="real_name")
+				label(for='real_name') Real Name
+			.input-field.col.s12.m6
+				input#vis_name.validate(placeholder='Displayed Name', type='text', name="displayed_name")
+				label(for='vis_name') Displayed Name
+			.input-field.col.s12.m6
+				select(name="flag")#country.icons
+					option(value='default', selected='') The same as team
+					for k in flags
+						option(data-icon="/files/img/flags/"+k+".png", value=k)= k
+				label Images in select
+			.input-field.col.s12.m6
+				select(name="team")#teams_list.icons
+					option(value='default', selected='') No team
+				label Images in select
+			.input-field.col.s12.m6
+				input#sid.validate(placeholder='Steam ID 64', type='text', pattern="[0-9]+", name="sid")
+				label(for='sid') SteamID64
+			.input-field.col.s12
+				a.waves-effect.waves-light.btn#save_player Save player
+				a.waves-effect.waves-light.btn.disabled#delete_player Delete player
