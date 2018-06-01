@@ -118,10 +118,10 @@ function updatePage(data) {
     
     //Setting teams' flag
     if(teamLeft.country_code){
-        $("#team_1 #team_flag").css("background-image", "url('/files/img/flags/"+teamLeft.country_code + ".png')";
+        $("#team_1 #team_flag").css("background-image", "url('/files/img/flags/"+teamLeft.country_code + ".png')");
     }
     if(teamRight.country_code){
-        $("#team_2 #team_flag").css("background-image", "url('/files/img/flags/"+teamRight.country_code + ".png');
+        $("#team_2 #team_flag").css("background-image", "url('/files/img/flags/"+teamRight.country_code + ".png')";
     }
     
     var playerlist = data.getPlayers(); // Array of player objects
