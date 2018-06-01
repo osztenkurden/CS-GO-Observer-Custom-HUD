@@ -25,9 +25,15 @@ Basically, CS:GO is streaming data to local app-server, that transformes data an
 }
 ```
 
-## PGL's style example
+## Examples
 ![Here](http://i.imgur.com/p9KNsHB.png)
+Video:
+[![Video example](https://img.youtube.com/vi/5FYlgwVcYmg/0.jpg)](https://youtu.be/5FYlgwVcYmg)
 So this is possible to do with everything below.
+
+## Setting up video
+
+[![Video example](https://img.youtube.com/vi/YOUTUBE_VIDEO_ID_HERE/0.jpg)](https://www.youtube.com/watch?v=bT8W-WvJe1w)
 
 ## How to make it run?
  - Install NodeJS (nodejs.org)
@@ -112,7 +118,7 @@ function updatePage(data) {
     
     //Setting teams' flag
     if(teamLeft.country_code){
-        $("#team_1 #team_flag").css("background-image", "url('/files/img/flags/"+teamLeft.country_code + ".png');
+        $("#team_1 #team_flag").css("background-image", "url('/files/img/flags/"+teamLeft.country_code + ".png')";
     }
     if(teamRight.country_code){
         $("#team_2 #team_flag").css("background-image", "url('/files/img/flags/"+teamRight.country_code + ".png');
