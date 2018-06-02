@@ -66,20 +66,24 @@ function fillObserved(player) {
     });
 }
 function fillPlayers(teams){
-    for(var i = 0; i < 5; i++){
-        if(i >=teams.left.players.length){
-            $("#left").find("#player"+(i+1)).css("opacity", "0");
-        } else{
-            fillPlayer(teams.left.players[i],i, "left", teams.left.players.length);
-            $("#left").find("#player"+(i+1)).css("opacity","1");
+    if(teams.left.players){
+        for(var i = 0; i < 5; i++){
+            if(i >=teams.left.players.length){
+                $("#left").find("#player"+(i+1)).css("opacity", "0");
+            } else{
+                fillPlayer(teams.left.players[i],i, "left", teams.left.players.length);
+                $("#left").find("#player"+(i+1)).css("opacity","1");
+            }
         }
     }
-    for(var i = 0; i < 5; i++){
-        if(i >=teams.right.players.length){
-            $("#right").find("#player"+(i+1)).css("opacity","0");
-        } else{
-            fillPlayer(teams.right.players[i],i, "right", teams.right.players.length);
-            $("#right").find("#player"+(i+1)).css("opacity","1");
+    if(teams.right.players){
+        for(var i = 0; i < 5; i++){
+            if(i >=teams.right.players.length){
+                $("#right").find("#player"+(i+1)).css("opacity","0");
+            } else{
+                fillPlayer(teams.right.players[i],i, "right", teams.right.players.length);
+                $("#right").find("#player"+(i+1)).css("opacity","1");
+            }
         }
     }
 }
@@ -217,7 +221,6 @@ function updatePage(data) {
     } else {
         $("#match_tournament").hide();
     }
-        console.log(matchup)
 
     if (observed.steamid == 1 || !observed) {
         $("#player-container").css("opacity", "0");
