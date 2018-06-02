@@ -189,6 +189,7 @@ $(document).ready(function () {
             if (integ.getPlayers() !== false) {
                 for (var k in integ.getPlayers()) {
                     let slot = integ.getPlayers()[k].observer_slot;
+                    let steamid = integ.getPlayers()[k].steamid;
 
                     slotted[slot] = integ.getPlayers()[k];
 
@@ -197,17 +198,18 @@ $(document).ready(function () {
                     if(!slotted[slot].steamid){
                         slotted[slot].steamid = k;
                     }
-                    slotted[slot].name = players_data[k]
-                        ? players_data[k].displayed_name || name
+
+                    slotted[slot].name = players_data[steamid]
+                        ? players_data[steamid].displayed_name || name
                         : name;
-                    slotted[slot].real_name = players_data[k]
-                        ? players_data[k].real_name || name
+                    slotted[slot].real_name = players_data[steamid]
+                        ? players_data[steamid].real_name || name
                         : name;
-                    if (players_data[k] && players_data[k].country_code) {
-                        slotted[slot].country_code = players_data[k].country_code;
+                    if (players_data[steamid] && players_data[steamid].country_code) {
+                        slotted[slot].country_code = players_data[steamid].country_code;
                     }
-                    if (players_data[k] && players_data[k].team) {
-                        slotted[slot].teamData = integ.loadTeam(players_data[k].team);
+                    if (players_data[steamid] && players_data[steamid].team) {
+                        slotted[slot].teamData = integ.loadTeam(players_data[steamid].team);
                     }
                     integ.getPlayers()[k].getState = function () {
                         return this.state;

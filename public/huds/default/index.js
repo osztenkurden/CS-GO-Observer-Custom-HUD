@@ -13,9 +13,11 @@ function fillObserved(player) {
     if (player.observer_slot >= 1 && player.observer_slot <= 5) {
         right = true;
     }
+    if(player.country_code) player.country_code = false;
     let flag = player.country_code || (right
         ? (teams.left.flag || "")
         : (teams.right.flag || ""));
+    
     if(flag){
         $("#current_nick").css("background-image", "url(/files/img/flags/" + flag + ".png)").removeClass("no-flag");
     } else {
