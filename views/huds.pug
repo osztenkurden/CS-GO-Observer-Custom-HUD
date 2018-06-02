@@ -16,7 +16,7 @@
 					input#name.validate(placeholder='Name for new instance', type='text')
 				td
 					.col.s10
-						input#delay.validate(placeholder='Delay in seconds', type='number')
+						input#delay.validate(placeholder='Delay in seconds', type='number', min=0)
 				td(colspan="2")
 				td
 					a.waves-effect.waves-light.btn.add_hud Add instance

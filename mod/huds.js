@@ -32,6 +32,8 @@ module.exports = {
 
         let instance = req.body; //name of instance, name of hud, seconds of delay;
 
+        instance.delay = !instance.delay || instance.delay < 0 ? 0 : instance.delay;
+
         if(!existingHUDs.includes(instance.hud)) return res.sendStatus(500);
         
         db.insert(instance, (err, newHUD) => {
@@ -70,7 +72,7 @@ module.exports = {
         let data = req.body;
 
         if(!data.id || data.enabled == null || !data.name || data.delay == null) return res.sendStatus(500);
-        db.update({ _id: data.id }, { $set: {enabled: data.enabled, name:data.name, delay:data.delay}}, {}, (err, numReplaced) => {
+        db.update({ _id: data.id }, { $set: {enabled: data.enabled, name:data.name, delay:(data.delay || 0)}}, {}, (err, numReplaced) => {
             if(err) return res.sendStatus(500);
             return res.sendStatus(200);
         });
@@ -104,7 +106,7 @@ module.exports = {
                 avatars: config.DisplayAvatars,
                 hud: hud_dir,
                 css: css_dir,
-                delay: hud.delay
+                delay: hud.delay > 0 ? hud.delay : 0
             });
         }
 
