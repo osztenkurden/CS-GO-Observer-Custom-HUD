@@ -94,8 +94,8 @@ $(document).ready(function () {
                 let player = this.getPlayers()[sid];
                 if (player.team.toLowerCase() == "ct") {
                     if(player.state && (player.state.equip_value || player.state.money)){
-                        team_money += player.state.money;
-                        equip_value += player.state.equip_value;
+                        team_money += player.state.money || 0;
+                        equip_value += player.state.equip_value || 0;
                     }
                     all_players.push(player);
                 }
@@ -124,8 +124,8 @@ $(document).ready(function () {
                 let player = this.getPlayers()[sid];
                 if (player.team.toLowerCase() == "t") {
                     if (player.state && (player.state.equip_value || player.state.money)) {
-                        team_money += player.state.money;
-                        equip_value += player.state.equip_value;
+                        team_money += player.state.money || 0;
+                        equip_value += player.state.equip_value || 0;
                     }
                     all_players.push(player);
                 }
@@ -179,9 +179,6 @@ $(document).ready(function () {
     };
     let match = null;
 
-    if (!disp_avatars) {
-        $("#player-container").addClass("no-avatar");
-    }
     function create(data, players_data, teams_data){
             data.teamList = teams_data;
             integ.info = data;
