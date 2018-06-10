@@ -260,7 +260,7 @@ function updatePage(data) {
 ### Phase
 |Property|Description|Example|Values|
 |---|---|---|---|
-|phase|Team's score|```var phase = phase.phase;```|(String) freezetime/live/over/bomb/defuse|
+|phase|Team's score|```var phase = phase.phase;```|(String) freezetime/live/over/bomb/defuse/paused/timeout_t/timeout_ct|
 |phase_ends_in|Team's name|```var time = phase.phase_ends_in;//"8.9"```|(String) Time (seconds) with decimal|
 
 # API Requests to databases
