@@ -284,10 +284,10 @@ function updatePage(data) {
         teams.right.players = right.players || null;
 
         $("#match_one_info")
-            .removeClass("ct t")
+            .removeClass("ct-color t-color")
             .addClass(test_player2.team.toLowerCase());
         $("#match_two_info")
-            .removeClass("ct t")
+            .removeClass("ct-color t-color")
             .addClass(test_player2.team.toLowerCase() != "ct"
                 ? "ct"
                 : "t");
