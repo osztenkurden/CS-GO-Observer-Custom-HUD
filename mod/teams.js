@@ -28,11 +28,18 @@ exports.updateTeam = (req, res) => {
 
     if(req.file) team.logo = req.file.filename;
 
+    //Why only update DB when file is removed, ilogical, rework needs to be done.
     function removeLogoFile(err, teamList){
         if(err) return res.sendStatus(500);
         if(!teamList[0]) return res.sendStatus(200);
 
-        if(fs.existsSync('./public/teams/' + teamList[0].logo)) fs.unlinkSync('./public/teams/' + teamList[0].logo);
+        //do not overwrite logo if not selected
+        if (!team.logo) {
+            team.logo = teamList[0].logo;
+        }
+        else {
+            if (fs.existsSync('./public/teams/' + teamList[0].logo)) fs.unlinkSync('./public/teams/' + teamList[0].logo);
+        }
 
         db.update({ _id: teamId }, { $set: {team_name: team.team_name, short_name:team.short_name, country_code:team.country_code, logo:team.logo}}, {}, (err, numReplaced) => {
             if(err) return res.sendStatus(500);
