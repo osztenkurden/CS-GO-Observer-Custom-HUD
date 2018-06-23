@@ -388,7 +388,10 @@ function updatePage(data) {
                     $('#win_announcer').prepend("<img src='/teams/" + winnerTeam.logo + "' height='40px' style='margin-right: 20px;' id='winner_image'/>"); //TODO: do better
                 }
                 if ($("#who_won").css("opacity") == 0) {
+                    console.log("fade triggerd");
                     $('#who_won').fadeTo(1000, 0.75);
+                    //TODO: add jquery UI or use animate
+                    //$('#who_won').effect("scale", { origin: ['middle', 'center'], from: { width: $(this).width() / 2, height: $(this).height() / 2 }, direction: 'both', easing: "easeOutBounce" }, 2000);
                 }
                 if (round.win_team == "CT") {
                     $('#win_announcer_border').css(
@@ -402,9 +405,6 @@ function updatePage(data) {
                         "linear-gradient(to left, rgba(193,149,17,0), rgba(193,149,17,1))"
                     );
                 }
-            }
-            else {
-                fadeWinner();
             }
         }
         else {
@@ -479,9 +479,10 @@ function updatePage(data) {
 
 function fadeWinner() {
     if ($("#who_won").css("opacity") == 0.75) {
-        $('#who_won').fadeTo(1000, 0);
-        if ($("#winner_image").length) {
-            $("#winner_image").fadeTo(1000, 0).delay(1000).remove();
-        }
+        $('#who_won').fadeTo(1000, 0, function () {
+            if ($("#winner_image").length) {
+                $("#winner_image").remove();
+            }
+        });
     }
 }
