@@ -388,7 +388,6 @@ function updatePage(data) {
                     $('#win_announcer').prepend("<img src='/teams/" + winnerTeam.logo + "' height='40px' style='margin-right: 20px;' id='winner_image'/>"); //TODO: do better
                 }
                 if ($("#who_won").css("opacity") == 0) {
-                    console.log("fade triggerd");
                     $('#who_won').fadeTo(1000, 0.75);
                     //TODO: add jquery UI or use animate
                     //$('#who_won').effect("scale", { origin: ['middle', 'center'], from: { width: $(this).width() / 2, height: $(this).height() / 2 }, direction: 'both', easing: "easeOutBounce" }, 2000);
