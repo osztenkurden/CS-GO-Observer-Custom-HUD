@@ -262,8 +262,21 @@ function updatePage(data) {
             ? team_ct
             : team_t;
         
+        teams.left.side = left.side || null;
+        teams.right.side = right.side || null;
+
         teams.left.name = team_one.team_name || left.name;
         teams.right.name = team_two.team_name || right.name;
+
+        if(teams.left.score !== undefined && teams.right.score !== undefined){
+            if(left.score > teams.left.score){
+                $("#winning_team").text(teams.left.name).removeClass("t-color ct-color").addClass(teams.left.side.toLowerCase() + "-color");
+                $("#who_won").fadeTo(1000, 1).delay(2000).fadeTo(1000, 0);
+            } else if(right.score > teams.right.score){
+                $("#winning_team").text(teams.right.name).removeClass("t-color ct-color").addClass(teams.right.side.toLowerCase() + "-color");
+                $("#who_won").fadeTo(1000, 1).delay(2000).fadeTo(1000, 0);
+            }
+        }
 
         teams.left.score = left.score;
         teams.right.score = right.score;
@@ -277,8 +290,6 @@ function updatePage(data) {
         teams.left.map_score = team_one.map_score || 0;
         teams.right.map_score = team_two.map_score || 0;
 
-        teams.left.side = left.side || null;
-        teams.right.side = right.side || null;
 
         teams.left.players = left.players || null;
         teams.right.players = right.players || null;
