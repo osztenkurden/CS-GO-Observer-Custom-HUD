@@ -1,6 +1,6 @@
 # CS:GO Observer Custom HUD
 
-Shout-out to [RedSparr0w](https://github.com/RedSparr0w) for base code and idea! You are the best, man.
+Shout-out to [RedSparr0w](https://github.com/RedSparr0w) for his base code and original idea! You are the best, man.
 
 ## How does it work?
 Basically, CS:GO is streaming data to local app-server, that transformes data and then load it to local webpage.
@@ -33,7 +33,6 @@ Video^
 So this is possible to do with everything below.
 
 ## Setting up video
-
 [![Video example](https://img.youtube.com/vi/bT8W-WvJe1w/0.jpg)](https://www.youtube.com/watch?v=bT8W-WvJe1w)
 
 ## How to make it run?
@@ -46,13 +45,17 @@ There are propably milions of bugs and different things, so be prepared.
 
 ## Admin Panel
 After starting the code go to address showing up in terminal/command prompt. You should see Admin Panel divided in three parts - Teams, Players, Create Match and HUDs. In here you can manage data used in HUDs during match ups.
+
 #### Teams tab
 You can here define teams, their name, short names (actually short names are not use anywhere for now), their country flag and logo. Files for teams' logos are being held in `public/teams/` and their filename should start from `logo-`.
+
 #### Players tab
 In Players tab you can define player's real name, displayed name, country flag (can also be set to "The same as team"), their team and, to identify players, SteamID64.
+
 #### Create match tab
 Here you can set type of match - is this a map of BO2, BO3 or BO5, score for teams and which team it should load to HUD. In case players are on the wrong side (left/right) there is `SWAP` button to quickly tell the HUD to swap teams' name, logo and flag.
 Additionaly, if during the match you decide that there is a type in team's or player's information, you can change it (for example on mobile phone, if you allow Node through firewall and you are on the same local network) and then in this tab click the `Force Refresh HUD`, to make sure all the changes are applied.
+
 ### HUDS
 This tab shows local HUDs. They are not validated whether or not they actually work, but if any of the files is missing, it will notify you in Warnings column.
 You can enable/disable each HUD to make it accessible or not. There is also HUD URL information - if you click it, it will redirect you to local webpage, that's serving as a HUD. It is useful if streamer wants to stream HUD separately - for example it can be added in OBS as Browser Source, then you just need to set it to HUD's URL.
@@ -74,7 +77,7 @@ In `index.js` the most important part is `updatePage()` function. It is required
 All of main action that will take place on your screen happens in `updatePage()` function, so when you want to represent some information you will need to write your code within its boundaries.
 ```javascript
 function updatePage(data) {
-	//Here happens magic
+    // Here's where the magic happens
 }
 ```
 `data` argument is being passed to it, and from that we can take actions, such as getting informations about players, map, round phases, etc. Below you will find detailed information about received information :>
@@ -106,37 +109,35 @@ Methods to obtain different objects:
 Example:
 ```javascript
 function updatePage(data) {
-	var player = data.getObserved(); // Getting spectated players object
+    var player = data.getObserved(); // Getting spectated players object
     var teamLeft = data.getTeamOne(); // Team 1's informations
     var teamRight = data.getTeamTwo(); // Team 2's informations
     
     var round = data.round();
     
-    // Setting teams' names
+    // Setting team names
     $("#team_one_name").html(teamLeft.team_name); 
     $("#team_two_score").html(teamRight.team_name);
     // Those might be null if none specified, then use getT() and getCT() 
     
     //Setting teams' flag
-    if(teamLeft.country_code){
+    if (teamLeft.country_code) {
         $("#team_1 #team_flag").css("background-image", "url('/files/img/flags/"+teamLeft.country_code + ".png')");
     }
-    if(teamRight.country_code){
+    if (teamRight.country_code) {
         $("#team_2 #team_flag").css("background-image", "url('/files/img/flags/"+teamRight.country_code + ".png')";
     }
     
     var playerlist = data.getPlayers(); // Array of player objects
-    if(playerlist){
-        for(var steamid in playerlist){
-        	/* Actions here will be taken for each player */
+    if (playerlist) {
+        for (var steamid in playerlist) {
+            /* Actions here will be taken for each player */
             let player = playerlist[steamid];
             
             let displayed_name = player.name;
             let real_name = player.real_name; // If real name isn't set, it will show player.name
         }
     }
-    
-    
 }
 ```
 
@@ -160,11 +161,13 @@ Properties
 Example:
 ```javascript
 function updatePage(data) {
-	var player = data.getObserved(); //Getting spectated players object
+    var player = data.getObserved(); //Getting spectated players object
     var name =  player.name; //Getting name of that player
     var slot = player.observer_slot; // Getting slot of that player
     
-     if(player.team == "CT"){...}
+    if (player.team == "CT") {
+        ...
+    }
 }
 ```
 Methods
@@ -203,15 +206,17 @@ Example:
 
 ```javascript
 function updatePage(data) {
-	var player = data.getObserved(); //Getting spectated players object
+    var player = data.getObserved(); //Getting spectated players object
     var stats =  player.getStats();
     var weapons = player.getWeapons();
     
     $("#health_box").html(stats.health);
     
-    for(var k in weapons){...}
+    for (var k in weapons) {
+        ...
+    }
     
-    if(stats.defusekit !== true){
+    if (stats.defusekit !== true) {
     	$("#defusekit").css("display", "hidden");
     }
 }
@@ -304,5 +309,6 @@ function updatePage(data) {
 |`/api/teams_logo`|DELETE|`{teamId: String}`|Status `200` or `500`|
 |`/api/huds`|GET||`{players: [Array of HUD objects with unique _id property]}` or `Status 500`|
 |`/api/huds`|POST|`{id: String, enabled: Boolean}`| Status `200` or `500`|
+
 ## Credits
-As I mentioned before, [RedSparr0w](https://github.com/RedSparr0w) is the man I wouldn't make it without.
+As I mentioned before, [RedSparr0w](https://github.com/RedSparr0w) is the man I couldn't make it without his input.
