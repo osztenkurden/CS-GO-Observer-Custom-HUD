@@ -5,7 +5,7 @@
 	body {
 		margin: 0;
 		padding: 0;
-		font-family: 'Saira Semi Condensed', sans-serif;
+		font-family: 'Roboto', sans-serif;
 		color: white;
 		background-color: rgba(0, 0, 0, 0);
 	}
@@ -36,16 +36,17 @@
 #defuse_time{
   position:absolute;
   left:141px;
-  top:90px;
+  top:100px;
   height:50px;
-  font-size:30px;
+	font-size:30px;
+	font-weight: bold;
 }
 
 	#bomb_timer{
   width:100%;
   height:10px;
   margin:auto;
-	background: linear-gradient(to right, rgba(204, 255, 0, 0.3), rgba(204, 255, 0, 1), rgba(204, 255, 0, 0.3));
+	background: linear-gradient(to right, rgba(204, 255, 0, 0.35), rgba(204, 255, 0, 1), rgba(204, 255, 0, 0.35));
 }
 	#team_1 > #team_logo > #team_flag {
 		position: absolute;
@@ -111,13 +112,13 @@
 	.first_tm {
 		height: 60%;
 		font-size: 30px;
-		margin-top: -10px;
+		/* margin-top: -10px; */
 	}
 
 	#player-container {
 		position: fixed;
 		bottom: 100px;
-		font-family: 'Saira Semi Condensed', sans-serif;
+		font-family: 'Roboto', sans-serif;
 		left: 50%;
 		margin-left: -460px;
 		height: 70px;
@@ -128,16 +129,16 @@
 		width: 781px;
 	}
 	#player-container.ct #container2 #second_row{
-		background-color:#5788a8;
+		background-color:#29B6F6;
 	}
 	#player-container.t #container2 #first_row #current_nick{
-		color: #c19511;
+		color: #FFCA28;
 	}
 	#player-container.t #container2 #second_row{
-		background-color: #c19511;
+		background-color: #FFCA28;
 	}
 	#player-container.ct #container2 #first_row #current_nick{
-		color: #5788a8;
+		color: #29B6F6;
 	}
 	.no-avatar #avatar_container{
 		display:none;
@@ -170,10 +171,10 @@
 	#stat_money {
 		width: 20%;
 		height: 100%;
-		color: #ef562d;
-		text-shadow: 0 0 8px black;
+		color: #F44336;
+		/* text-shadow: 0 0 5px black; */
 		font-size: 25px;
-		font-weight: 600;
+		font-weight: bold;
 		margin-top: 12px;
 	}
 
@@ -199,14 +200,13 @@
 		margin-top:85px;
 	}
 
-
 	#player-container i {
 		font-size: 30px;
 		left: 3px;
 	}
 
 	#health {
-		color: #2ecc71;
+		color: #ccff00;
 	}
 
 	#health-text {
@@ -257,13 +257,12 @@
 		top: -5px;
 	}
 
-	#armor-text {
-		
+	#armor-text {		
 		background-repeat: no-repeat;
 		background-size: 29%;
 		background-position: left 40%;
 		display: inline-block;
-		font-size: 35px;
+		font-size: 30px;
 		margin-left: 20px;
 		padding-left: 40px;
 		font-weight: 900;
@@ -332,11 +331,11 @@
 	}
 
 	.ct_color {
-		background-color: #5788a8 !important;
+		background-color: #29B6F6 !important;
 	}
 
 	.t_color {
-		background-color: #c19511 !important;
+		background-color: #FFCA28 !important;
 	}
 
 	#second_row {
@@ -348,17 +347,17 @@
 
 	#current_nick {
 		width: 25%;
-		font-family: 'Saira Semi Condensed', sans-serif;
+		font-family: 'Roboto', sans-serif;
 		font-weight: 600;
 		font-size: 30px;
-		display: inline-block;
+		/* display: inline-block; */
 		white-space: nowrap;
-		
+		padding-top: 5px;	
 		background-repeat: no-repeat;
 		background-position: 0 65%;
 		background-size: 27px;
 		padding-left:36px;
-		float:left;
+		float: left;
 		overflow:hidden;
 	}
 	#current_nick.no-flag{
@@ -374,11 +373,12 @@
 
 
 	#health_armor {
-		font-family: 'Saira Semi Condensed', sans-serif;
+		font-family: 'Roboto', sans-serif;
 		height: 100%;
 		width: 30%;
 		float: right;
-		    margin-top: -7px;
+		margin-top: -7px;
+		margin-top: 8px;
 	}
 	#round_stats {
 		height: 85px;
@@ -406,7 +406,7 @@
 	#stat_money {
 		width: 20%;
 		height: 100%;
-		color: #ef562d;
+		color: #F44336;
 		text-shadow: 0 0 8px black;
 		font-size: 25px;
 		font-weight: 600;
@@ -427,8 +427,8 @@
 	#stats-container {
 		position: fixed;
 		bottom: 0px;
-		background: linear-gradient(to right, rgba(0, 0, 0, 0.3), rgba(0, 0, 0, 0) 100px, rgba(0, 0, 0, 0) 1000px, rgba(0, 0, 0, 0.3));
-		font-family: 'Saira Semi Condensed', sans-serif;
+		background: linear-gradient(to right, rgba(0, 0, 0, 0.3), rgba(0, 0, 0, 0) 120px, rgba(0, 0, 0, 0) 980px, rgba(0, 0, 0, 0.3));
+		font-family: 'Roboto', sans-serif;
 		left: 50%;
 		margin-left: -550px;
 		height: 420px;
@@ -438,10 +438,11 @@
 	}
 
 	#ammo {
-		font-family: 'Saira Semi Condensed', sans-serif;
+		font-family: 'Roboto', sans-serif;
 		height: 100%;
 		width: 17%;
 		float: right;
+		margin-top: 8px;
 	}
 
 	.inlining {
@@ -455,21 +456,21 @@
 
 	#health-text {
 		display: inline-block;
-		font-size: 40px;
+		font-size: 30px;
 		font-weight: 900;
 		width: 55px;
 	}
 
 	#clip-text {
 		display: inline-block;
-		font-size: 35px;
+		font-size: 30px;
 		font-weight: 900;
 		width: 55px;
 	}
 
 	#reserve-text {
 		display: inline-block;
-		font-size: 35px;
+		font-size: 30px;
 		font-weight: 900;
 		width: 55px;
 	}
@@ -496,10 +497,10 @@
 		border-radius: 50%;
 	}
 	.ct .block.win{
-		background-color:rgba(111,179,224,0.6);
+		background-color:rgba(41,182,246, 0.6);
 	}
 	.t .block.win{
-		background-color:rgba(255,211,78,0.6);
+		background-color:rgba(255,202,40, 0.6);
 	}
 	#match_one_info .block{
 		float:right;
@@ -747,7 +748,8 @@
 		max-height: 100%;
 	}
 	.equip_bar>.moneys {
-		color: #add28b;
+		padding-top: 5px;
+		color: #ccff00;
 		text-shadow: 0px 0px 10px black;
 		font-weight: bold;
 	}
@@ -843,10 +845,10 @@
 		float: left;
 	}
 	.ct-color{
-		color:#73afd6;
+		color:#29B6F6;
 	}
 	.t-color{
-		color:#f7bf16;
+		color:#FFCA28;
 	}
 
 	#team_2 {
@@ -912,7 +914,7 @@
 		position: fixed;
 		bottom: 0px;
 		
-		font-family: 'Saira Semi Condensed', sans-serif;
+		font-family: 'Roboto', sans-serif;
 		left: 50%;
 		margin-left: -550px;
 		height: 420px;
