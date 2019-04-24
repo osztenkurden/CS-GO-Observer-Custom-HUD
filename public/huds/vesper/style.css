@@ -129,13 +129,13 @@
 		width: 781px;
 	}
 	#player-container.ct #container2 #second_row{
-		background: linear-gradient(to right, rgba(41, 182, 246, 0.75), rgba(41, 182, 246, 0));
+		background: linear-gradient(to right, rgba(41, 182, 246, 0.85), rgba(41, 182, 246, 0));
 	}
 	#player-container.t #container2 #first_row #current_nick{
 		color: #FFCA28;
 	}
 	#player-container.t #container2 #second_row{
-		background: linear-gradient(to right, rgb(255, 202, 40, 0.75), rgb(255, 202, 40, 0));
+		background: linear-gradient(to right, rgba(255, 202, 40, 0.85), rgba(255, 202, 40, 0));
 	}
 	#player-container.ct #container2 #first_row #current_nick{
 		color: #29B6F6;
@@ -324,7 +324,7 @@
 	}
 
 	#first_row {
-		background:linear-gradient(to right, rgba(0, 0, 0, 0.75), rgba(0, 0, 0, 0));
+		background:linear-gradient(to right, rgba(0, 0, 0, 0.85), rgba(0, 0, 0, 0));
 		height: 70%;
 		padding-left: 15px;
 		width: 100%;
@@ -359,6 +359,7 @@
 		padding-left:36px;
 		float: left;
 		overflow:hidden;
+		text-overflow: ellipsis;
 	}
 	#current_nick.no-flag{
 		padding-left:0px;
@@ -446,6 +447,7 @@
 	}
 
 	.inlining {
+		padding-top: 2px;
 		display: inline;
 	}
 
@@ -642,6 +644,7 @@
 		white-space: nowrap;
 		font-size:20px;
 		font-weight: medium;
+		text-overflow: ellipsis;
 	}
 
 	#right>.player>.bar1>.hp_bar>.bar_username {
@@ -654,6 +657,7 @@
 		white-space: nowrap;
 		font-size:20px;
 		font-weight: medium;
+		text-overflow: ellipsis;
 	}
 
 	#left>.player>.bar1>.hp_bar>.bar_weapon,
