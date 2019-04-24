@@ -96,7 +96,7 @@ function fillPlayer(player,nr, side, max){
 
     let team = player.team.toLowerCase();
 
-    let health_color = statistics.health <= 20 ? "#e74c3c" : team == "ct" ? "#5788a8":"#c19511";
+    let health_color = statistics.health <= 20 ? "#f44336" : team == "ct" ? "#03a9f4":"#ffa000";
 
     let $player = $("#"+side).find("#player"+(nr+1));
 
