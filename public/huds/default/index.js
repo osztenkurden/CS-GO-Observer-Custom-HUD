@@ -96,7 +96,7 @@ function fillPlayer(player,nr, side, max){
 
     let team = player.team.toLowerCase();
 
-    let health_color = statistics.health <= 20 ? "#e74c3c" : team == "ct" ? "#5788a8":"#c19511";
+    let health_color = statistics.health <= 20 ? "#ff0000" : team == "ct" ? "#00a0ff":"#ffa000";
 
     let $player = $("#"+side).find("#player"+(nr+1));
 
@@ -119,6 +119,7 @@ function fillPlayer(player,nr, side, max){
     $bottom.find(".bomb_defuse").html(statistics.defusekit ? $("<img />").attr("src", "/files/img/elements/defuse.png").addClass("invert_brightness") : "");0
 
     $bottom.find(".moneys").text("$"+statistics.money);
+    $bottom.find(".moneys").removeClass("low").addClass(statistics.money < 1000? "low":"");
     
     $top.find("#weapon_icon").html("");
     $bottom.find("#weapon_icon").html("");
@@ -313,14 +314,14 @@ function updatePage(data) {
                 : "ct-color");
 
         $("#left")
-            .find("#team_money_1")
+            .find("#team_money_1").removeClass('low').addClass(left.team_money < 1000 ? "low":"")
             .text("$" + left.team_money);
         $("#left")
             .find("#eq_money_1")
             .text("$" + left.equip_value);
 
         $("#right")
-            .find("#team_money_2")
+            .find("#team_money_2").removeClass('low').addClass(right.team_money < 1000 ? "low":"")
             .text("$" + right.team_money);
         $("#right")
             .find("#eq_money_2")

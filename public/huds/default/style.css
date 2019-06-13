@@ -128,16 +128,19 @@
 		width: 781px;
 	}
 	#player-container.ct #container2 #second_row{
-		background-color:#5788a8;
+		background-color:#00a0ff;
 	}
 	#player-container.t #container2 #first_row #current_nick{
-		color: #c19511;
+		color: #ffa000;
 	}
 	#player-container.t #container2 #second_row{
-		background-color: #c19511;
+		background-color: #ffa000;
+	}
+	#team_money_2.low, #team_money_1.low{
+		color: #ff0000;
 	}
 	#player-container.ct #container2 #first_row #current_nick{
-		color: #5788a8;
+		color: #00a0ff;
 	}
 	.no-avatar #avatar_container{
 		display:none;
@@ -465,6 +468,7 @@
 		font-size: 35px;
 		font-weight: 900;
 		width: 55px;
+		text-align: right;
 	}
 
 	#reserve-text {
@@ -633,6 +637,7 @@
 		overflow: hidden;
 		white-space: nowrap;
 		font-size:20px;
+		text-shadow:none;
 	}
 
 	#right>.player>.bar1>.hp_bar>.bar_username {
@@ -643,6 +648,7 @@
 		overflow: hidden;
 		white-space: nowrap;
 		font-size:20px;
+		text-shadow:none;
 	}
 
 	#left>.player>.bar1>.hp_bar>.bar_weapon,
@@ -737,9 +743,12 @@
 		max-height: 100%;
 	}
 	.equip_bar>.moneys {
-		color: #add28b;
+		color: #00b400;
 		text-shadow: 0px 0px 10px black;
 		font-weight: bold;
+	}
+	.equip_bar>.moneys.low{
+		color:#ff0000;
 	}
 
 	.img-hor {
@@ -830,10 +839,10 @@
 		float: left;
 	}
 	.ct-color{
-		color:#73afd6;
+		color:#00a0ff;
 	}
 	.t-color{
-		color:#f7bf16;
+		color:#ffa000;
 	}
 
 	#team_2 {
