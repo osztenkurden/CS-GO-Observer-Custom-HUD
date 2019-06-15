@@ -305,10 +305,10 @@ function updatePage(data) {
                 : "t");
 
         $("#team_1")
-            .removeClass("ct t")
+            .removeClass("ct-color t-color")
             .addClass(test_player2.team.toLowerCase() + "-color");
         $("#team_2")
-            .removeClass("ct t")
+            .removeClass("ct-color t-color")
             .addClass(test_player2.team.toLowerCase() != "t"
                 ? "t-color"
                 : "ct-color");
