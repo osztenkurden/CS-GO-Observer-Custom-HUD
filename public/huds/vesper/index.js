@@ -105,6 +105,8 @@ function fillPlayer(player,nr, side, max){
 
     let gradient = "linear-gradient(to " + side +", rgba(0,0,0,0) " + (100-statistics.health) + "%, " + health_color + " " + (100-statistics.health) + "%)";
 
+    $player.css("background", statistics.health == 0 ? "linear-gradient(to " + side + ", rgba(0, 0, 0, 0), rgba(0, 0, 0, 0.45))" : "");
+
     $top.find("#bar_username").text(player.name.split(" ").join(""));
     $top.find("#bar_username").removeClass("dead").addClass(statistics.health == 0 ? "dead" : "");
 
@@ -383,7 +385,7 @@ function updatePage(data) {
     //PHASESc
     if (phase) {
         $("#time_counter").css("color", (phase.phase == "live" || phase.phase == "over" || phase.phase == "warmup" || (phase.phase == "freezetime" && phase.phase_ends_in > 10))
-            ? "white"
+            ? "#ccff00"
             : "red");
         $("#defuser").css("display", phase.phase == "defuse"
             ? "block"
@@ -402,7 +404,7 @@ function updatePage(data) {
                     isDefusing = true;
                 }
                 var seconds = Math.round(parseFloat(phase.phase_ends_in).toFixed(1));
-                $("#defuse_bar").css("width", 350 * (parseFloat(phase.phase_ends_in) / longd) + "px");
+                $("#defuse_bar").css("height", 150 * (parseFloat(phase.phase_ends_in) / longd) + "px");
                 $("#defuse_time").text("00:" + (seconds < 10 ? "0" + seconds : seconds));
             }
         } else {

@@ -1,52 +1,58 @@
-	@import url('https://fonts.googleapis.com/css?family=Roboto');
+	@import url('https://fonts.googleapis.com/css?family=Anton');
 
 
 	html,
 	body {
 		margin: 0;
 		padding: 0;
-		font-family: 'Roboto', sans-serif;
+		font-family: 'Anton', sans-serif;
 		color: white;
 		background-color: rgba(0, 0, 0, 0);
 	}
 	#defuser {
-  width:500px;
-  height:178px;
-  background-image:url("/files/img/elements/defusing.png");
+  width:150px;
+	height:150px;
+	background: rgba(0, 0, 0, 0.7);
+  /* background-image:url("/files/img/elements/defusing.png"); */
   position:absolute;
-  left:-274px;
-  margin-left:50%;
+  margin-left:46%;
   bottom:200px;
 }
 #defuser_title{
   position:absolute;
-  left:141px;
-  top:41px;
+  left:41px;
+  top:51px;
   height:50px;
-  font-size:30px;
+  font-size:20px;
+}
+#defuser_title img {
+	position: absolute;
+	top: -30px;
+	left: 20px;
 }
 #defuse_bar{
 	background: linear-gradient(to right, rgba(183,28,28, 1), rgba(244,67,54, 0.4));
-	width:350px;
+	width:140px;
+	height:140px;
 	position:absolute;
-	height:10px;
-	left:133px;
-	top:81px;
+	left: 5px;
+	top: 5px;
 }
 #defuse_time{
   position:absolute;
-  left:141px;
-  top:100px;
+  left:45px;
+  top:80px;
   height:50px;
 	font-size:30px;
 	font-weight: bold;
 }
 
 	#bomb_timer{
-  width:100%;
-  height:10px;
-  margin:auto;
-	background: linear-gradient(to right, rgba(244,67,54, 0.5), rgba(183,28,28, 1), rgba(244,67,54, 0.5));
+  width:1050px;
+  height:5px;
+	margin:auto;
+	margin-top: 5px;
+	background: linear-gradient(to right, rgba(244,67,54, 0), rgba(183,28,28, 1), rgba(244,67,54, 0));
 }
 	#team_1 > #team_logo > #team_flag {
 		position: absolute;
@@ -118,7 +124,7 @@
 	#player-container {
 		position: fixed;
 		bottom: 100px;
-		font-family: 'Roboto', sans-serif;
+		font-family: 'Anton', sans-serif;
 		left: 50%;
 		margin-left: -460px;
 		height: 70px;
@@ -262,8 +268,7 @@
 		background-size: 29%;
 		background-position: left 40%;
 		display: inline-block;
-		font-size: 30px;
-		margin-left: 20px;
+		font-size: 25px;
 		padding-left: 40px;
 		font-weight: 900;
 		width: 55px;
@@ -308,7 +313,7 @@
 		float: right;
 	}
 	#container2{
-		opacity:0.7;
+		opacity:0.9;
 	}
 
 	#ammo-container span {
@@ -372,14 +377,11 @@
 		margin-right: 10px;
 	}
 
-
 	#health_armor {
-		font-family: 'Roboto', sans-serif;
+		font-family: 'Anton', sans-serif;
 		height: 100%;
 		width: 30%;
-		float: right;
-		margin-top: -7px;
-		margin-top: 8px;
+		padding-top: 50px;
 	}
 	#round_stats {
 		height: 85px;
@@ -439,56 +441,66 @@
 	}
 
 	#ammo {
-		font-family: 'Roboto', sans-serif;
-		height: 100%;
+		font-family: 'Anton', sans-serif;
+		height: 40%;
 		width: 17%;
 		float: right;
-		margin-top: 8px;
+		margin-top: 45px;
+		padding-left: 15px;
+		padding-top: 2px;
 	}
 
 	.inlining {
-		padding-top: 2px;
+		padding-top: 8px;
+		margin-right: 10px;
 		display: inline;
+	}
+
+	#nick_also {
+		float: left;
 	}
 
 	#stats {
 		float: right;
 		width: 30%;
+		margin-right: 100px;
 	}
 
 	#health-text {
 		display: inline-block;
-		font-size: 30px;
+		font-size: 25px;
 		font-weight: 900;
 		width: 55px;
 	}
 
 	#clip-text {
 		display: inline-block;
-		font-size: 30px;
+		font-size: 25px;
 		font-weight: 900;
 		width: 55px;
 	}
 
 	#reserve-text {
 		display: inline-block;
-		font-size: 30px;
+		font-size: 25px;
 		font-weight: 900;
 		width: 55px;
 	}
 	#nades {
-		padding-top: 5px;
-		height: 80%;
+		margin-top: 45px;
+		margin-right: 10px;
+		height: 30%;
 		width: 20%;
 		float: right;
-		right: 40%;
+		right: 40%;;
+		padding: 6px;
+		padding-left: 15px;
 	}
 	#nades img {
-		height: 35px;
-        max-height: 35px;
+		height: 25px;
+        max-height: 25px;
         width:auto;
         filter: invert(100%);
-        float:right;
         margin-right:10px;
 	}
 	.block{
@@ -608,7 +620,6 @@
 		width: 33%;
 		text-align: center;
 		font-weight: 400;
-		padding-top: 5px;
 		font-size: 16px;
 	}
 	.death {
@@ -621,8 +632,7 @@
 		width: 40px;
 		height: 100%;
 		text-align: center;
-		padding-top: 5px;
-		font-weight: bold;
+		font-weight: medium;
 	}
 
 	#right>.player>.bar1>.hp_bar>.hp_el,
@@ -631,8 +641,7 @@
 		width: 40px;
 		height: 100%;
 		text-align: center;
-		padding-top: 5px;
-		font-weight: bold;
+		font-weight: medium;
 	}
 
 	#left>.player>.bar1>.hp_bar>.bar_username {
@@ -642,7 +651,7 @@
 		width: 120px;
 		overflow: hidden;
 		white-space: nowrap;
-		font-size:20px;
+		font-size:16px;
 		font-weight: medium;
 		text-overflow: ellipsis;
 	}
@@ -655,7 +664,7 @@
 		width: 120px;
 		overflow: hidden;
 		white-space: nowrap;
-		font-size:20px;
+		font-size:16px;
 		font-weight: medium;
 		text-overflow: ellipsis;
 	}
@@ -752,7 +761,6 @@
 		max-height: 100%;
 	}
 	.equip_bar>.moneys {
-		padding-top: 5px;
 		color: #ccff00;
 		text-shadow: 0px 0px 10px black;
 		font-weight: bold;
@@ -771,11 +779,12 @@
 	.equip_bar>.bar_weapon>img,
 	.hp_bar>.bar_weapon>img,
 	.equip_bar>.hp_el>img {
-		height: 75%;
+		height: 60%;
 		width: auto;
 		margin: auto;
 		margin-top: 2px;
 		margin-left:2px;
+		padding-top: 2px;
 	}
 
 	.hp_bar>.bar_weapon>img.invert {
@@ -800,41 +809,40 @@
 	}
 
 	#match_tournament {
-		width: 70%;
+		width: 24%;
 		margin: auto;
-		margin-top: 5px;
 		height: 30px;
-		background: linear-gradient(to right, rgba(0, 0, 0, 0), rgba(0, 0, 0, 0.65), rgba(0, 0, 0, 0));
-		border-top: 1px solid rgba(204, 255, 0, 0.6);
-		border-bottom: 1px solid rgba(204, 255, 0, 0.6);
 	}
 
 	#match_teams {
 		width: 100%;
 		margin-top: 10px;
 		height: 55px;
-		background: linear-gradient(to right, rgba(0, 0, 0, 0), rgba(0, 0, 0, 0.75), rgba(0, 0, 0, 0));
+		background: linear-gradient(to right, rgba(0, 0, 0, 0), rgba(0, 0, 0, 1), rgba(0, 0, 0, 0));
 	}
 	#team_name{
 		text-shadow: 0 0 10px black;
 	}
 
 	#time_counter {
-		font-size: 22px;
+		font-size: 20px;
 		font-weight: bold;
-		width: 10%;
+		width: 13%;
 		height: 50%;
 		margin: auto;
 		text-align: center;
-		padding-top: 5px;
+		background: #333333;
 		color: #ccff00;
 	}
 
 	#round_counter {
-		width: 15%;
+		width: 13%;
 		height: 50%;
+		font-size: 14px;
 		margin: auto;
 		text-align: center;
+		background: #333333;
+		color: #ccff00;
 	}
 
 	.team_info {
@@ -860,10 +868,13 @@
 		float: right;
 	}
 	#team_score{
-		margin-top:10px;
+		width: 37px;
+		height: 90%;
+		background: black;
+		padding-top: 5px;
 	}
 	#team_1 > #team_name{
-		margin-top:10px;
+		margin-top:5px;
 		float:right;
 	}
 	#avatar_container img {
@@ -874,23 +885,25 @@
 	}
 
 	#team_2 > #team_name{
-		margin-top:10px;
+		margin-top:5px;
 		float:left;
 	}
-	#team_1 > #team_score{
-		margin-right:10px;
-		float:right;
+	#team_1 > #team_score{		
+		padding-right:23px;		
+		margin-right: 14px;
+		float:right;		
 	}
 	#team_2 > #team_score{
-		margin-left:10px;
+		padding-left:23px;
+		margin-left:13px;
 		float:left;
 	}
 	#team_logo{
 		position: relative;
-		width:10%;
+		width:20%;
 		height:100%;
-		margin-right:20px;
-		margin-left:20px;
+		margin-right:30px;
+		margin-left:30px;
 	}
 	#team_logo.empty{
 		width:0%;
@@ -930,33 +943,39 @@
 	}
 	#match_one_info{
 		float:left;
-		width:35%;
+		width:24%;
 		text-align:right;
 		font-weight:600;
+		background: black;
+		border-top: 1px solid #ccff00;
 	}
 	#match_two_info{
 		float:right;
-		width:35%;
+		width:23.9%;
 		text-align:left;
 		font-weight:600;
+		background: black;
+		border-top: 1px solid #ccff00;
 	}
 	#match_info{
 		margin:auto;
-		width:30%;
+		width:54%;
 		text-align:center;
 		font-weight:500;
+		background: #333333;
+		border-top: 1px solid #333333;
 	}
 	#who_won{
 		display:none;
 		position:absolute;
 		height:60px;
 		margin-left:-500px;
+		padding-top: 5px;
 		left:50%;
 		top:180px;
 		width:1000px;
 		text-align: center;
-		font-size: 40px;
-		padding-top: 8px;
+		font-size: 35px;
 		background: linear-gradient(to right, rgba(0, 0, 0, 0), rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0))
 	}
 	#who_won div {
