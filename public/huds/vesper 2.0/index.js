@@ -103,6 +103,11 @@ function fillPlayer(player,nr, side, max){
     let $bottom = $player.find(".bottom_bar");
     let $top = $player.find(".bar1");
 
+    let death_css = {
+        "height":"30px",
+        "margin-top":"-2px",
+    }
+
     let gradient = "linear-gradient(to " + side +", rgba(0,0,0,0) " + (100-statistics.health) + "%, " + health_color + " " + (100-statistics.health) + "%)";
 
     $player.css("background", statistics.health == 0 ? "linear-gradient(to " + side + ", rgba(0, 0, 0, 0), rgba(0, 0, 0, 0.45))" : "");
@@ -110,7 +115,8 @@ function fillPlayer(player,nr, side, max){
     $top.find("#bar_username").text(player.name.split(" ").join(""));
     $top.find("#bar_username").removeClass("dead").addClass(statistics.health == 0 ? "dead" : "");
 
-    $top.find("#hp_p").text(statistics.health);
+    $top.find("#hp_p").text(statistics.health > 0 ? statistics.health : "");
+    $top.find("#hp_p").prepend(statistics.health == 0 ? $("<img />").attr("src", "/files/img/death.png").css(death_css) : "");
     $top.find(".hp_bar").css("background", gradient);
 
     $bottom.find(".kills").text(statistics.kills);
@@ -129,7 +135,7 @@ function fillPlayer(player,nr, side, max){
         let img_css = {
             "text-shadow":"0 0 10px black",
             "float": side,
-            "padding-top":"5px"
+            "padding-top":"3px"
         };
         $bottom.find("#weapon_icon").prepend($("<img />").attr("src", "/files/img/death.png").addClass("death").css("float", side)).prepend($("<div></div>").text(statistics.round_kills).css(img_css));
     }

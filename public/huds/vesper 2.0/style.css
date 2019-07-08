@@ -47,12 +47,11 @@ body {
   font-weight: bold;
 }
 
-	#bomb_timer{
-  width:1050px;
+#bomb_timer{
+  width:100%;
   height:5px;
-	margin:auto;
-	margin-top: 5px;
-	background: linear-gradient(to right, rgba(244,67,54, 0), rgba(183,28,28, 1), rgba(244,67,54, 0));
+  margin:auto;
+  background: linear-gradient(to right, rgba(244,67,54, 0), rgba(183,28,28, 1), rgba(244,67,54, 0));
 }
 	#team_1 > #team_logo > #team_flag {
 		position: absolute;
@@ -267,7 +266,7 @@ body {
 
 	#armor-text {		
 		background-repeat: no-repeat;
-		background-size: 29%;
+		background-size: 23%;
 		background-position: left 40%;
 		display: inline-block;
 		font-size: 25px;
@@ -441,9 +440,9 @@ body {
 		/* background: linear-gradient(to right, rgba(0, 0, 0, 0.3), rgba(0, 0, 0, 0) 120px, rgba(0, 0, 0, 0) 980px, rgba(0, 0, 0, 0.3)); */
 		font-family: 'Work Sans', sans-serif;
 		left: 50%;
-		margin-left: -550px;
+		margin-left: -650px;
 		height: 420px;
-		width: 1100px;
+		width: 1300px;
 		/*opacity: 0;*/
 		/*transform: skewX(40deg);*/
 	}
@@ -463,7 +462,7 @@ body {
 	}
 
 	#nick_also {
-		padding-top: 5px;
+		padding-top: 3px;
 		float: left;
 		transform: skew(30deg);
 	}
@@ -473,7 +472,7 @@ body {
 		width: 30%;
 		margin-right: 110px;
 		transform: skew(30deg);
-		margin-top: -20px;
+		margin-top: -18px;
 	}
 
 	#health-text {
@@ -497,7 +496,6 @@ body {
 		width: 55px;
 	}
 	#nades {
-		padding-top: 2px;
 		height: 80%;
 		width: 20%;
 		float: right;
@@ -543,8 +541,6 @@ body {
 	}
 	.equip_bar>.bar_weapon{
 		width:165px !important;
-		position: absolute;
-		left: 170px;
 	}
 
 	#right {
@@ -573,7 +569,7 @@ body {
 
 
 	#left>.player>.bar1>.hp_bar {
-		width: 295px;
+		width: 330px;
 		background: linear-gradient(to right, #01579b, #03a9f4);
 		height: 100%;
 		float: left;
@@ -584,7 +580,7 @@ body {
 	}
 
 	#right>.player>.bar1>.hp_bar {
-		width: 295px;
+		width: 330px;
 		background: linear-gradient(to left, #ff6f00, #ffa000);
 		height: 100%;
 		float: right;
@@ -655,6 +651,7 @@ body {
 	#left>.player>.bottom_bar>.equip_bar>.hp_el {
 		transform: skew(0);
 		margin-top: 0;
+		margin-left: 0;
 	}
 
 	#right>.player>.bar1>.hp_bar>.hp_el,
@@ -671,6 +668,7 @@ body {
 	#right>.player>.bottom_bar>.equip_bar>.hp_el {
 		transform: skew(0);
 		margin-top: 0;
+		margin-right: 0;
 	}
 
 	#left>.player>.bar1>.hp_bar>.bar_username {
@@ -787,10 +785,21 @@ body {
 	.bar_weapon>.invert.checked {
 		filter: invert(100%);
 	}
-	.hp_bar #weapon_icon{
+	#left /deep/ .hp_bar #weapon_icon{
 		max-width: 100%;
 		max-height: 100%;
+		transform: skew(30deg);
+		margin-right: 15px;
+		margin-top: 2px;
 	}
+	#right /deep/ .hp_bar #weapon_icon{
+		max-width: 100%;
+		max-height: 100%;
+		transform: skew(-30deg);
+		margin-left: 15px;
+		margin-top: 2px;
+	}
+
 	.hp_bar #weapon_icon img{
 		max-width: 90%;
 		max-height: 100%;
@@ -823,13 +832,13 @@ body {
 		padding-top: 2px;
 	}
 
-	.hp_bar>.bar_weapon>img.invert {
+	/* .hp_bar>.bar_weapon>img.invert {
 		filter: drop-shadow(0.5px 0.5px 1px white) drop-shadow(-0.5px -0.5px 1px white) invert(70%);
 	}
 
 	.hp_bar>.bar_weapon>img.checked.invert {
 		filter: drop-shadow(0.5px 0.5px 1px white) drop-shadow(-0.5px -0.5px 1px white) invert(100%);
-	}
+	} */
 
 	#right>.player {
 		float: right;
@@ -853,7 +862,7 @@ body {
 
 	#match_teams {
 		width: 100%;
-		margin-top: 10px;
+		margin-top: 5px;
 		height: 55px;
 		background: linear-gradient(to right, rgba(0, 0, 0, 0),rgba(0, 0, 0, 1) 500px, rgba(0, 0, 0, 1),rgba(0, 0, 0, 1) 550px ,rgba(0, 0, 0, 0));
 	}
@@ -879,7 +888,6 @@ body {
 		font-size: 14px;
 		margin: auto;
 		text-align: center;
-		color: #ccff00;
 		transform: rotateX(30deg);
 	}
 
@@ -1025,7 +1033,7 @@ body {
 		position:absolute;
 		height:60px;
 		margin-left:-500px;
-		padding-top: 5px;
+		padding-top: 15px;
 		left:50%;
 		top:180px;
 		width:1000px;
