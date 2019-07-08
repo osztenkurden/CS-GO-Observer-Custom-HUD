@@ -306,3 +306,7 @@ function updatePage(data) {
 |`/api/huds`|POST|`{id: String, enabled: Boolean}`| Status `200` or `500`|
 ## Credits
 As I mentioned before, [RedSparr0w](https://github.com/RedSparr0w) is the man I wouldn't make it without.
+
+
+## Support/Donate
+[![Paypal donate](https://www.paypalobjects.com/en_US/PL/i/btn/btn_donateCC_LG.gif)](https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&hosted_button_id=BM67UTG39894S&source=url)
