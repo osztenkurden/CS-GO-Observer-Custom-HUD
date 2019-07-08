@@ -1,0 +1,337 @@
+html
+  head
+    script(src="/socket.io/socket.io.js")
+    script(src="http://code.jquery.com/jquery-2.1.4.min.js")
+    script.
+      var ip = "#{ip}",
+      port = "#{port}",
+      disp_avatars = #{avatars},
+      delay = #{delay};
+    script(src="/js/main.js")
+    script(src=hud)
+    link(rel='stylesheet', href=css)
+  body
+    section
+      #bomb_timer
+      #header
+        #match_teams
+          #round_info(style='height: 100%;')
+            #team_1.team_info(style='height: 100%;')
+              #team_score 0             
+              #team_name Team 1
+              #team_logo
+                #team_flag
+                img#team_1_logo
+            #team_2.team_info(style='height: 100%;')
+              #team_score 0             
+              #team_name Team 2
+              #team_logo
+                #team_flag
+                img#team_2_logo
+            #time_counter 1:55
+            #round_counter Round 0 / 30
+        #match_tournament
+          div(style='margin:auto; width:100%')
+            #match_one_info
+              .block
+              .block
+            #match_two_info
+              .block
+              .block
+            #match_info Best Of 3
+      #defuser    
+        #defuse_bar         
+        #defuser_title
+          img(src='/files/img/elements/defuse.png', style='max-height: 25px; filter: brightness(5%) invert(100%); opacity: 1')
+          | DEFUSING
+        #defuse_time
+          | 10:00
+      #who_won
+        #winning_team
+        div win the round!
+      #stats-container
+        #left_stats
+          #stats_player1.stats_player.st_left
+            #stat_money.st_left
+              | -$1000
+          #stats_player2.stats_player.st_left
+            #stat_money.st_left
+              | -$1000
+          #stats_player3.stats_player.st_left
+            #stat_money.st_left
+              | -$1000
+          #stats_player4.stats_player.st_left
+            #stat_money.st_left
+              | -$1000
+          #stats_player5.stats_player.st_left
+            #stat_money.st_left
+              | -$1000
+        #right_stats
+          #stats_player6.stats_player.st_right
+            #stat_money.st_right
+              | -$1000
+          #stats_player7.stats_player.st_right
+            #stat_money.st_right
+              | -$1000
+          #stats_player8.stats_player.st_right
+            #stat_money.st_right
+              | -$1000
+          #stats_player9.stats_player.st_right
+            #stat_money.st_right
+              | -$1000
+          #stats_player0.stats_player.st_right
+            #stat_money.st_right
+              | -$1000
+      #player-container
+        #avatar_container(style="width:139px; height:139px; margin-top:-90px; margin-left: 20px; position:absolute")
+        #container2(style="width:781px;")
+          #first_row
+            #current_nick
+              | oszten
+            #ammo
+              #clip-text.clip 100
+              #reserve-text.reserve 100           
+            #health_armor
+              #health-text 100
+              #armor-text 100
+          #second_row
+            #nick_also.inlining
+              | NICK
+            #nades.inlining
+              img(src='/files/img/grenades/weapon_flashbang.png', style='max-height: 20px; width:auto; filter: invert(100%); margin-right:10px;')
+              img(src='/files/img/grenades/weapon_smokegrenade.png', style='max-height: 20px; width:auto; filter: invert(100%); margin-right:10px;')
+              img(src='/files/img/grenades/weapon_hegrenade.png', style='max-height: 20px; width:auto; filter: invert(100%); margin-right:10px;')
+            #stats.inlining
+              #kills_count.inlining K: 13 
+              #assist_count.inlining A: 13 
+              #death_count.inlining D: 13 
+      #left.team
+        .money
+          img.invert(src='/files/img/elements/team.png', style='height: 35px; margin-top:25px; margin-left:10px; margin-right:10px; float:left;')
+          div(style='width:30%; height:20px; float:left; color: #ccff00')
+            .first_title_tm Team money:
+            #team_money_1.first_tm(style='font-weight:600') $0
+          img.invert(src='/files/img/elements/eq.png', style='height: 35px; margin-top:25px; margin-right:10px; float:left;')
+          div(style='width:40%; float:left; color: #FFCA28;')
+            .first_title_tm Equipment value:
+            #eq_money_1.first_tm(style='font-weight:600') $0
+        #player1.player
+          .bar1
+            .hp_bar
+              #hp_p.hp_el 100
+              #bar_username.bar_username undefined
+              #weapon_icon.bar_weapon.ct
+            //- .stat_t
+            //-   .kills K
+            //-   .assists A
+            //-   .deaths D
+          .bottom_bar
+            .equip_bar
+              .hp_el
+              .moneys.ct 0$
+              .bomb_defuse.ct
+                img.invert_brightness(src='/files/img/elements/defuse.png')
+              #weapon_icon.bar_weapon.ct
+            //- .stat_t
+            //-   .kills 0
+            //-   .assists 0
+            //-   .deaths 0
+        #player2.player
+          .bar1
+            .hp_bar
+              #hp_p.hp_el 100
+              #bar_username.bar_username undefined
+              #weapon_icon.bar_weapon.ct
+            //- .stat_t
+            //-   .kills K
+            //-   .assists A
+            //-   .deaths D
+          .bottom_bar
+            .equip_bar
+              .hp_el
+              .moneys.ct 0$
+              .bomb_defuse.ct
+                img.invert_brightness(src='/files/img/elements/defuse.png')
+              #weapon_icon.bar_weapon.ct
+            //- .stat_t
+            //-   .kills 0
+            //-   .assists 0
+            //-   .deaths 0
+        #player3.player
+          .bar1
+            .hp_bar
+              #hp_p.hp_el 100
+              #bar_username.bar_username undefined
+              #weapon_icon.bar_weapon.ct
+            //- .stat_t
+            //-   .kills K
+            //-   .assists A
+            //-   .deaths D
+          .bottom_bar
+            .equip_bar
+              .hp_el
+              .moneys.ct 0$
+              .bomb_defuse.ct
+                img.invert_brightness(src='/files/img/elements/defuse.png')
+              #weapon_icon.bar_weapon.ct
+            //- .stat_t
+            //-   .kills 0
+            //-   .assists 0
+            //-   .deaths 0
+        #player4.player
+          .bar1
+            .hp_bar
+              #hp_p.hp_el 100
+              #bar_username.bar_username undefined
+              #weapon_icon.bar_weapon.ct
+            //- .stat_t
+            //-   .kills K
+            //-   .assists A
+            //-   .deaths D
+          .bottom_bar
+            .equip_bar
+              .hp_el
+              .moneys.ct 0$
+              .bomb_defuse.ct
+                img.invert_brightness(src='/files/img/elements/defuse.png')
+              #weapon_icon.bar_weapon.ct
+            //- .stat_t
+            //-   .kills 0
+            //-   .assists 0
+            //-   .deaths 0
+        #player5.player
+          .bar1
+            .hp_bar
+              #hp_p.hp_el 100
+              #bar_username.bar_username undefined
+              #weapon_icon.bar_weapon.ct
+            //- .stat_t
+            //-   .kills K
+            //-   .assists A
+            //-   .deaths D
+          .bottom_bar
+            .equip_bar
+              .hp_el
+              .moneys.ct 0$
+              .bomb_defuse.ct
+                img.invert_brightness(src='/files/img/elements/defuse.png')
+              #weapon_icon.bar_weapon.ct
+            //- .stat_t
+            //-   .kills 0
+            //-   .assists 0
+            //-   .deaths 0
+      #right.team
+        .money
+          img.invert(src='/files/img/elements/team.png', style='height: 35px; margin-top:25px; margin-left:10px; margin-right:10px; float:right; ')
+          div(style='width:30%; float:right; color: #ccff00; text-align:right;')
+            .first_title_tm(style='width: 300px;') Team money:
+            #team_money_2.first_tm(style='font-weight:600') $0
+          img.invert(src='/files/img/elements/eq.png', style='height: 35px; margin-top:25px; margin-left:10px; margin-right:10px; float:right;')
+          div(style='width:40%; float:right; color: #FFCA28; text-align:right')
+            .first_title_tm(style='width: 300px;') Equipment value:
+            #eq_money_2.first_tm(style='font-weight:600') $0
+        #player1.player
+          .bar1
+            .hp_bar
+              #hp_p.hp_el 100
+              #bar_username.bar_username undefined
+              #weapon_icon.bar_weapon.t
+            //- .stat_t
+            //-   .kills K
+            //-   .assists A
+            //-   .deaths D
+          .bottom_bar
+            .equip_bar
+              .hp_el
+              .moneys.t 0$
+              .bomb_defuse.t
+                img.invert_brightness(src='/files/img/elements/bomb.png')
+              #weapon_icon.bar_weapon.t
+            //- .stat_t
+            //-   .kills 0
+            //-   .assists 0
+            //-   .deaths 0
+        #player2.player
+          .bar1
+            .hp_bar
+              #hp_p.hp_el 100
+              #bar_username.bar_username undefined
+              #weapon_icon.bar_weapon.t
+            //- .stat_t
+            //-   .kills K
+            //-   .assists A
+            //-   .deaths D
+          .bottom_bar
+            .equip_bar
+              .hp_el
+              .moneys.t 0$
+              .bomb_defuse.t
+                img.invert_brightness(src='/files/img/elements/bomb.png')
+              #weapon_icon.bar_weapon.t
+            //- .stat_t
+            //-   .kills 0
+            //-   .assists 0
+            //-   .deaths 0
+        #player3.player
+          .bar1
+            .hp_bar
+              #hp_p.hp_el 100
+              #bar_username.bar_username undefined
+              #weapon_icon.bar_weapon.t
+            //- .stat_t
+            //-   .kills K
+            //-   .assists A
+            //-   .deaths D
+          .bottom_bar
+            .equip_bar
+              .hp_el
+              .moneys.t 0$
+              .bomb_defuse.t
+                img.invert_brightness(src='/files/img/elements/bomb.png')
+              #weapon_icon.bar_weapon.t
+            //- .stat_t
+            //-   .kills 0
+            //-   .assists 0
+            //-   .deaths 0
+        #player4.player
+          .bar1
+            .hp_bar
+              #hp_p.hp_el 100
+              #bar_username.bar_username undefined
+              #weapon_icon.bar_weapon.t
+            //- .stat_t
+            //-   .kills K
+            //-   .assists A
+            //-   .deaths D
+          .bottom_bar
+            .equip_bar
+              .hp_el
+              .moneys.t 0$
+              .bomb_defuse.t
+                img.invert_brightness(src='/files/img/elements/bomb.png')
+              #weapon_icon.bar_weapon.t
+            //- .stat_t
+            //-   .kills 0
+            //-   .assists 0
+            //-   .deaths 0
+        #player5.player
+          .bar1
+            .hp_bar
+              #hp_p.hp_el 100
+              #bar_username.bar_username undefined
+              #weapon_icon.bar_weapon.t
+            //- .stat_t
+            //-   .kills K
+            //-   .assists A
+            //-   .deaths D
+          .bottom_bar
+            .equip_bar
+              .hp_el
+              .moneys.t 0$
+              .bomb_defuse.t
+                img.invert_brightness(src='/files/img/elements/bomb.png')
+              #weapon_icon.bar_weapon.t
+            //- .stat_t
+            //-   .kills 0
+            //-   .assists 0
+            //-   .deaths 0
