@@ -46,7 +46,6 @@ function fillObserved(player) {
         }
         if (weapon.state == "active" || weapon.state == "reloading") {
             if (weapon.type == "Grenade" || weapon.type == "C4" || weapon.type == "Knife" || statistics.health == 0) {
-
                 $(".clip").html("");
                 $(".reserve").html("");
             } else {
@@ -393,7 +392,7 @@ function updatePage(data) {
     //PHASESc
     if (phase) {
         $("#time_counter").css("color", (phase.phase == "live" || phase.phase == "over" || phase.phase == "warmup" || (phase.phase == "freezetime" && phase.phase_ends_in > 10))
-            ? "#ccff00"
+            ? "white"
             : "red");
         $("#defuser").css("display", phase.phase == "defuse"
             ? "block"

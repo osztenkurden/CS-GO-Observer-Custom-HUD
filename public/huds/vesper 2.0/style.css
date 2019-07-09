@@ -364,7 +364,6 @@ body {
 		background-repeat: no-repeat;
 		background-position: 0 65%;
 		background-size: 27px;
-		padding-left:200px;
 		float: left;
 		overflow:hidden;
 		text-overflow: ellipsis;
@@ -384,7 +383,7 @@ body {
 	#health_armor {
 		font-family: 'Work Sans', sans-serif;
 		height: 100%;
-		width: 30%;
+		width: 27%;
 		float: right;
 		/* margin-top: -7px; */
 		padding-top: 10px;
@@ -448,12 +447,13 @@ body {
 	}
 
 	#ammo {
+		padding-left: 40px;
 		font-family: 'Work Sans', sans-serif;
 		height: 100%;
-		width: 17%;
+		width: 20%;
 		float: right;
-		padding-top: 10px;
 		transform: skew(30deg);
+		padding-top: 10px;
 	}
 
 	.inlining {
@@ -483,10 +483,11 @@ body {
 	}
 
 	#clip-text {
+		background-position: left center;
 		display: inline-block;
 		font-size: 25px;
 		font-weight: 900;
-		width: 55px;
+		width: 40px;
 	}
 
 	#reserve-text {
@@ -871,13 +872,12 @@ body {
 	}
 
 	#time_counter {
-		font-size: 20px;
+		font-size: 24px;
 		font-weight: bold;
 		width: 13%;
 		height: 50%;
 		margin: auto;
 		text-align: center;
-		color: #ccff00;
 		transform: rotateX(30deg);
 		padding-top: 5px;
 	}
