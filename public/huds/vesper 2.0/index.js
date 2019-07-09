@@ -1,4 +1,4 @@
-
+// Official HUD for eFire League (https://efire.gg) - Powered by Vesper platform
 var teams = {
     left: {},
     right: {}
