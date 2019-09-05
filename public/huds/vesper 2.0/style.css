@@ -846,13 +846,13 @@ body {
 		float: right;
 	}
 	#header {
-		width: 1050px;
+		width: 1150px;
 		height: 100px;
 		position: fixed;
 		top: 0;
 
 		left: 50%;
-		margin-left: -525px;
+		margin-left: -585px;
 	}
 
 	#match_tournament {
@@ -869,7 +869,7 @@ body {
 		background: linear-gradient(to right, rgba(0, 0, 0, 0),rgba(0, 0, 0, 1) 500px, rgba(0, 0, 0, 1),rgba(0, 0, 0, 1) 550px ,rgba(0, 0, 0, 0));
 	}
 	#team_name{
-		padding-top: 5px;
+		padding-top: 8px;
 	}
 
 	#time_counter {
@@ -894,7 +894,7 @@ body {
 
 	.team_info {
 		width: 45%;
-		font-size:30px;
+		font-size:25px;
 		text-transform: uppercase;
 		font-weight: bold;
 	}
@@ -921,11 +921,10 @@ body {
 	#team_score{
 		width: 37px;
 		height: 90%;
-		padding-top: 8px;
+		padding-top: 10px;
 	}
 	#team_1 > #team_name{
 		margin-top:3px;
-		margin-right: 20px;
 		float:right;
 		transform: skew(-30deg);
 	}
@@ -938,7 +937,6 @@ body {
 
 	#team_2 > #team_name{
 		margin-top:3px;
-		margin-left: 20px;
 		float:left;
 		transform: skew(30deg);
 	}
@@ -979,12 +977,10 @@ body {
 	}
 	#team_1>#team_logo{
 		float:right;
-		margin-right: 100px;
 		transform: skew(-30deg);
 	}
 	#team_2>#team_logo{
 		float:left;
-		margin-left: 100px;
 		transform: skew(30deg);
 	}
 	#flash-container {
