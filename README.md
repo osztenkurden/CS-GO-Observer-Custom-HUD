@@ -1,3 +1,5 @@
+# DEPRECATED - USE [HUD MANAGER](https://github.com/lexogrine/hud-manager)
+
 # CS:GO Observer Custom HUD
 
 Shout-out to [RedSparr0w](https://github.com/RedSparr0w) for base code and idea! You are the best, man.
