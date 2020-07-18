@@ -1,4 +1,4 @@
-# DEPRECATED - USE [HUD MANAGER](https://github.com/lexogrine/hud-manager)
+# DEPRECATED - USE [LEXOGRINE HUD MANAGER](https://github.com/lexogrine/hud-manager)
 
 # CS:GO Observer Custom HUD
 
